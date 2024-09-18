@@ -1,4 +1,8 @@
-import { Collection, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "./User.entity";
+import { Tag } from "./Tag.entity";
+import { Permission } from "./Permission.entity";
+import { Sprint } from "./Sprint.entity";
 
 @Entity("Projects")
 export class Project {
@@ -10,4 +14,16 @@ export class Project {
 
     @Column({ length: 500 })
     description?: string;
+
+    @ManyToOne(() => User, { cascade: true })
+    user?: User;
+
+    @ManyToOne(() => Tag, { cascade: false })
+    tag?: Tag;
+
+    @OneToMany(() => Permission, (p) => p.project)
+    permissions?: Permission[];
+
+    @OneToMany(() => Sprint, (s) => s.project)
+    sprints?: Sprint[];
 }
