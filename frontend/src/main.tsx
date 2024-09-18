@@ -20,6 +20,8 @@ import { Home } from './pages/home/index.tsx';
 import { Project } from './pages/project/index.tsx';
 import { Calendar } from './pages/calendar/index.tsx';
 import { Profile } from './pages/profile/index.tsx';
+import { Register } from './pages/register/index.tsx';
+import { Password } from './pages/password/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -60,6 +62,20 @@ const router = createBrowserRouter([
     element:
       <App>
         <Calendar />
+      </App>
+  },
+  {
+    path: "/register",
+    element:
+      <App>
+        <Register />
+      </App>
+  },
+  {
+    path: "/password",
+    element:
+      <App>
+        <Password />
       </App>
   }
 ]);
