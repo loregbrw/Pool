@@ -1,12 +1,10 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./User.entity";
-import { Project } from "./Project.entity";
+import BaseEntity from "./BaseEntity.entity";
+import User from "./User.entity";
+import Project from "./Project.entity";
 
 @Entity("Tags")
-export class Tag {
-    @PrimaryGeneratedColumn()
-    id?: number;
-
+export default class Tag extends BaseEntity {
     @Column()
     name?: string;
 

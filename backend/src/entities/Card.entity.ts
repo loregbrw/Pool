@@ -1,12 +1,12 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { CardsColumn } from "./CardsColumn.entity";
-import { Section } from "./Section.entity";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne } from "typeorm";
+import BaseEntity from "./BaseEntity.entity";
+import CardsColumn from "./CardsColumn.entity";
+import Section from "./Section.entity";
+import CardTag from "./CardTag";
+import User from "./User.entity";
 
 @Entity("Cards")
-export class Card {
-    @PrimaryGeneratedColumn()
-    id?: number;
-
+export default class Card extends BaseEntity {
     @Column()
     name?: string;
 
@@ -27,4 +27,12 @@ export class Card {
 
     @ManyToOne(() => Section, { cascade: true })
     section?: Section;
+
+    @ManyToMany(() => CardTag)
+    @JoinTable()
+    tag?: CardTag;
+
+    @ManyToMany(() => User)
+    @JoinTable()
+    users?: User[];
 }

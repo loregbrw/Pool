@@ -1,5 +1,5 @@
 import path from "path";
-import { DataSource, DataSourceOptions, Migration } from "typeorm";
+import { DataSource, DataSourceOptions } from "typeorm";
 import "dotenv/config";
 
 const buildSettings = (): DataSourceOptions => {
@@ -19,12 +19,24 @@ const buildSettings = (): DataSourceOptions => {
     const dbType: string | undefined = process.env.DB_TYPE;
     if (!dbType) throw new Error("Missing env var: 'DB_TYPE'");
 
+    const host: string | undefined = process.env.HOST;
+    if (!host) throw new Error("Missing env var: 'HOST'");
+
+    const username: string | undefined = process.env.USERNAME;
+    if (!username) throw new Error("Missing env var: 'DB_TYPE'");
+
+    const password: string | undefined = process.env.PASSWORD;
+    if (!password) throw new Error("Missing env var: 'PASSWORD'");
+
+    const database: string | undefined = process.env.DATABASE;
+    if (!database) throw new Error("Missing env var: 'DATABASE'");
+
     return {
         type: dbType as "postgres" | "mssql",
-        host: "localhost",
-        username: "server",
-        password: "pass",
-        database: "Pool",
+        host: host,
+        username: username,
+        password: password,
+        database: database,
         entities: [entitiesPath],
         migrations: [migrationPath],
         options: {

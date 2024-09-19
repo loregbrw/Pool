@@ -1,12 +1,10 @@
 import { Column, Entity, ManyToOne, NumericType, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Project } from "./Project.entity";
-import { CardsColumn } from "./CardsColumn.entity";
+import BaseEntity from "./BaseEntity.entity";
+import Project from "./Project.entity";
+import CardsColumn from "./CardsColumn.entity";
 
 @Entity("Sprints")
-export class Sprint {
-    @PrimaryGeneratedColumn()
-    id?: number;
-
+export default class Sprint extends BaseEntity {
     @Column()
     name?: string;
 
@@ -15,6 +13,9 @@ export class Sprint {
 
     @Column()
     duration?: number;
+
+    @Column()
+    status?: boolean;
 
     @ManyToOne(() => Project, { cascade: true })
     project?: Project;

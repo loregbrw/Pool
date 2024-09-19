@@ -1,12 +1,10 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { CardsColumn } from "./CardsColumn.entity";
-import { Card } from "./Card.entity";
+import BaseEntity from "./BaseEntity.entity";
+import CardsColumn from "./CardsColumn.entity";
+import Card from "./Card.entity";
 
 @Entity("Sections")
-export class Section {
-    @PrimaryGeneratedColumn()
-    id?: number;
-
+export default class Section extends BaseEntity {
     @Column()
     name?: string;
 

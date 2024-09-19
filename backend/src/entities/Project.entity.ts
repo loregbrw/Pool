@@ -1,19 +1,20 @@
 import { Column, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./User.entity";
-import { Tag } from "./Tag.entity";
-import { Permission } from "./Permission.entity";
-import { Sprint } from "./Sprint.entity";
+import BaseEntity from "./BaseEntity.entity";
+import User from "./User.entity";
+import Tag from "./Tag.entity";
+import Permission from "./Permission.entity";
+import Sprint from "./Sprint.entity";
 
 @Entity("Projects")
-export class Project {
-    @PrimaryGeneratedColumn()
-    id?: number;
-
+export default class Project extends BaseEntity {
     @Column()
     name?: string;
 
     @Column({ length: 500 })
     description?: string;
+
+    @Column()
+    status?: boolean;
 
     @ManyToOne(() => User, { cascade: true })
     user?: User;

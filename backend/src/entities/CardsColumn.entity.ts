@@ -1,13 +1,11 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Sprint } from "./Sprint.entity";
-import { Card } from "./Card.entity";
-import { Section } from "./Section.entity";
+import BaseEntity from "./BaseEntity.entity";
+import Card from "./Card.entity";
+import Sprint from "./Sprint.entity";
+import Section from "./Section.entity";
 
 @Entity("CardsColumn")
-export class CardsColumn {
-    @PrimaryGeneratedColumn()
-    id?: number;
-
+export default class CardsColumn extends BaseEntity {
     @Column()
     name?: string;
 

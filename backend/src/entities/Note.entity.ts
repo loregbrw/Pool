@@ -1,11 +1,9 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./User.entity";
+import { Column, Entity, ManyToOne, } from "typeorm";
+import BaseEntity from "./BaseEntity.entity";
+import User from "./User.entity";
 
 @Entity("Notes")
-export class Note {
-    @PrimaryGeneratedColumn()
-    id?: number;
-
+export default class Note extends BaseEntity {
     @Column({ length: 500 })
     body?: string;
 

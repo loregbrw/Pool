@@ -1,14 +1,14 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Project } from "./Project.entity";
-import { Permission } from "./Permission.entity";
-import { Note } from "./Note.entity";
-import { Tag } from "./Tag.entity";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import BaseEntity from "./BaseEntity.entity";
+import Project from "./Project.entity";
+import Permission from "./Permission.entity";
+import Note from "./Note.entity";
+import Tag from "./Tag.entity";
+import Card from "./Card.entity";
+import Notification from "./Notification.entity";
 
 @Entity("Users")
-export class User {
-    @PrimaryGeneratedColumn()
-    id?: number;
-
+export default class User extends BaseEntity {
     @Column()
     name?: string;
     
@@ -38,4 +38,12 @@ export class User {
 
     @OneToMany(() => Tag, (t) => t.user)
     tags?: Tag[];
+
+    @ManyToMany(() => Card)
+    @JoinTable()
+    cards?: Card[];
+
+    @OneToMany(() => Notification, (n) => n.user)
+    notifications?: Notification[];
+
 }

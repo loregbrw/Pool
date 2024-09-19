@@ -1,19 +1,21 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./User.entity";
-import { Project } from "./Project.entity";
 import { EPermission } from "../enums/EPermission.enum";
+import BaseEntity from "./BaseEntity.entity";
+import User from "./User.entity";
+import Project from "./Project.entity";
 
 @Entity("Permissions")
-export class Permission {
-    @PrimaryGeneratedColumn()
-    id?: number;
-
+export default class Permission extends BaseEntity {
     @ManyToOne(() => User, { cascade: true })
     user?: User;
 
     @ManyToOne(() => Project, { cascade: true })
     project?: Project;
 
-    @Column()
+    @Column({
+        type: "enum",
+        enum: EPermission,
+        default: EPermission.VIEWER
+    })
     permission?: EPermission;
 }
