@@ -1,7 +1,7 @@
 export const Initial = () => {
     return(
         <>
-        
+            
         </>
     )
 }

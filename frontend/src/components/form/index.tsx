@@ -1,4 +1,4 @@
-import { LoginConteiner } from "./styled";
+import { LoginConteiner } from "./style";
 import { Forms } from "./Form";
 import { Logo } from "./Logo";
 

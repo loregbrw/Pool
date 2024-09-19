@@ -22,6 +22,7 @@ import { Calendar } from './pages/calendar/index.tsx';
 import { Profile } from './pages/profile/index.tsx';
 import { Register } from './pages/register/index.tsx';
 import { Password } from './pages/password/index.tsx';
+import { ThemeProvider } from './context/theme.tsx';
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
     element:
       <App>
         <Home />
-      </App>
+      </App> 
   },
   {
     path: "/project/:id",
@@ -66,23 +67,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element:
-      <App>
-        <Register />
-      </App>
+    element:<Register />
   },
   {
     path: "/password",
-    element:
-      <App>
-        <Password />
-      </App>
+    element:<Password />
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-    <ToastContainer />
+    <ThemeProvider>
+      <RouterProvider router={router} />
+      <ToastContainer />
+    </ThemeProvider>
   </React.StrictMode>
 );

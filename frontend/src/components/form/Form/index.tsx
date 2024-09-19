@@ -1,5 +1,5 @@
 import { IFormProps } from ".."
-import { Button, Form, FormGroup, FormInput, Input, Label, FormContainer, TituleForm, FGPassword } from "./styles"
+import { Button, Form, FormGroup, FormInput, Input, Label, FormContainer, TituleForm, FGPassword } from "./style"
 
 export const Forms = ({ title, inputs, button }: IFormProps) => {
     return (

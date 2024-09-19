@@ -1,4 +1,4 @@
-import { ImgBackground, LogoImg, Slogan } from "./styles";
+import { ImgBackground, LogoImg, Slogan } from "./style";
 import LogoPool from '/LogoPoolJet.png';
 
 export const Logo = () => {
