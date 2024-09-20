@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { EPermission } from "../enums/EPermission.enum";
+import { EPermission, permissionToString, stringToPermission } from "../enums/EPermission.enum";
 import BaseEntity from "./BaseEntity.entity";
 import User from "./User.entity";
 import Project from "./Project.entity";
@@ -13,9 +13,12 @@ export default class Permission extends BaseEntity {
     project?: Project;
 
     @Column({
-        type: "enum",
-        enum: EPermission,
-        default: EPermission.VIEWER
+        type: "varchar",
+        length: 20,
+        transformer: {
+            to: permissionToString,
+            from: stringToPermission
+        }
     })
     permission?: EPermission;
 }

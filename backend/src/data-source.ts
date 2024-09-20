@@ -18,19 +18,19 @@ const buildSettings = (): DataSourceOptions => {
     
     const dbType: string | undefined = process.env.DB_TYPE;
     if (!dbType) throw new Error("Missing env var: 'DB_TYPE'");
-
-    const host: string | undefined = process.env.HOST;
-    if (!host) throw new Error("Missing env var: 'HOST'");
-
-    const username: string | undefined = process.env.USERNAME;
-    if (!username) throw new Error("Missing env var: 'DB_TYPE'");
-
-    const password: string | undefined = process.env.PASSWORD;
-    if (!password) throw new Error("Missing env var: 'PASSWORD'");
-
-    const database: string | undefined = process.env.DATABASE;
-    if (!database) throw new Error("Missing env var: 'DATABASE'");
-
+    
+    const host: string | undefined = process.env.DB_HOST;
+    if (!host) throw new Error("Missing env var: 'DB_HOST'");
+    
+    const username: string | undefined = process.env.DB_USERNAME;
+    if (!username) throw new Error("Missing env var: 'DB_USERNAME'");
+    
+    const password: string | undefined = process.env.DB_PASSWORD;
+    if (!password) throw new Error("Missing env var: 'DB_PASSWORD'");
+    
+    const database: string | undefined = process.env.DB_DATABASE;
+    if (!database) throw new Error("Missing env var: 'DB_DATABASE'");
+    
     return {
         type: dbType as "postgres" | "mssql",
         host: host,

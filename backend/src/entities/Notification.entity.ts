@@ -13,6 +13,6 @@ export default class Notification extends BaseEntity {
     @Column()
     date?: Date;
 
-    @Column({ type: "json" })
+    @Column({ type: "nvarchar", length: "MAX" })
     content?: string;
 }

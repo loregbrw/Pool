@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
-import "express-async-errors";
 import AppError from "../errors";
 
 const handleError = (err: Error, req: Request, res: Response, next: NextFunction) => {

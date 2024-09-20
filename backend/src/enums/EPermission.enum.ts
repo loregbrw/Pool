@@ -1,4 +1,26 @@
+import AppError from "../errors";
+
 export enum EPermission {
-    VIEWER = 0,
-    EDITOR = 1
+    VIEWER,
+    EDITOR
+}
+
+export const permissionToString = (permission: EPermission): string => {
+    switch(permission) {
+        case EPermission.VIEWER:
+            return "Viewer";
+        case EPermission.EDITOR:
+            return "Editor";
+    }
+}
+
+export const stringToPermission = (string: string): EPermission => {
+    switch(string) {
+        case "Viewer":
+            return EPermission.VIEWER;
+        case "Editor":
+            return EPermission.EDITOR;
+        default:
+            throw new AppError("Error getting EPermission enum from database", 500);
+    }
 }
