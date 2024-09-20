@@ -12,6 +12,7 @@ export const HeaderContainer = styled.div`
 
     position: fixed;
     z-index: 500;
+    border-bottom: 2px solid ${EColorPalette.JET};
 `
 
 export const LeftTop = styled.div`

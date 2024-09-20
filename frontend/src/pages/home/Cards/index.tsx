@@ -10,7 +10,7 @@ export const Cards = () => {
                     </CardColor>
                     <InfoCard>
                         <NameProject>Nome do Projeto</NameProject>
-                        <Description>Descrisão descrisão descrisão</Description>
+                        <Description>Descrição descrição descrição</Description>
                     </InfoCard>
                     <PeopleGroup>
                         <PeopleImg src="/Perfil.png"/>

@@ -13,12 +13,13 @@ export const CardsContainer = styled.div`
 export const Card = styled.div` 
     display: flex;
     background-color: ${EColorPalette.FRENCHGRAY};
-    width: 300px;
-    height: 200px;
+    width: 100%;
+    max-width: 300px;
     flex-direction: column;
     gap: 10px;
-    padding: 20px;
+    padding: 15px;
     border-radius: 10px;
+    justify-content: space-between;
 `
 
 export const CardColor = styled.div`
@@ -28,6 +29,7 @@ export const CardColor = styled.div`
     width: 100%;
     border-radius: 10px;
     justify-content: right;
+    position: relative;
 `
 
 export const CardNotification = styled.div`
@@ -35,6 +37,10 @@ export const CardNotification = styled.div`
     height: 20px;
     width: 20px;
     border-radius: 100%;
+    position: absolute;
+
+    right: -5px;
+    top: -5px;
 `
 export const InfoCard = styled.div`
     display: flex;
@@ -56,7 +62,8 @@ export const PeopleGroup = styled.div`
 
 export const PeopleImg = styled.img`
     border-radius: 100%;
-    height: 100%;    
+    height: 100%;
+    object-fit: cover;
 `
 export const MorePeople = styled.h2`
 `
