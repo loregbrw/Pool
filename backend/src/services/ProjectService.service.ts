@@ -16,7 +16,7 @@ export default class ProjectService {
         const projectRepo = AppDataSource.getRepository(Project);
 
         const user = await userRepo.findOne({ where: { id: userId } });
-        
+
         if (!user)
             throw new AppError("Problem authenticating user!", 401);
 
@@ -38,7 +38,7 @@ export default class ProjectService {
     public static update = async (id: string, payload: TProjectUpdate, userId: string): Promise<Project> => {
 
         const projectRepo = AppDataSource.getRepository(Project);
-        
+
         const project = await projectRepo.findOne({
             where: { id: id },
             relations: {
@@ -78,18 +78,71 @@ export default class ProjectService {
         await projectRepo.softDelete(id);
     }
 
-    public static getById = async (id: string, userId: string): Promise<{project: Project, status: string} => {
+    // public static getById = async (id: string, userId: string): Promise<{project: Project, permission: string}> => {
 
-    }
+    //     const userRepo = AppDataSource.getRepository(User);
+    //     const projectRepo = AppDataSource.getRepository(Project);
+    //     const permissionRepo = AppDataSource.getRepository(Permission);
+    
+    //     const user = await userRepo.findOne({ where: { id: userId } });
+    
+    //     if (!user)
+    //         throw new AppError("User authentication failed!", 401);
+    
+    //     // const project = await projectRepo.findOne({
+    //     //     where: { id },
+    //     //     relations: {
+    //     //         user: true,
+    //     //         sprints: {
+    //     //             columns: {
+    //     //                 sections: {
+    //     //                     cards: {
+    //     //                         users: true,
+    //     //                         tag: true
+    //     //                     }
+    //     //                 },
+    //     //                 cards: {
+    //     //                     users: true,
+    //     //                     tag: true
+    //     //                 }
+    //     //             }
+    //     //         },
+    //     //         permissions: {
+    //     //             user: true
+    //     //         },
+    //     //         tag: true
+    //     //     }
+    //     // });
+    
+    //     // if (!project)
+    //     //     throw new AppError("Project not found!", 404);
+    
+    //     // if (project.user?.id !== user.id) {
+    //     //     const permission = await permissionRepo.findOne({
+    //     //         where: {
+    //     //             project,
+    //     //             user
+    //     //         }
+    //     //     });
+    
+    //     //     if (!permission)
+    //     //         throw new AppError("Forbidden access!", 403);
+    
+    //     //     return { project, permission: permission.permission?.toString()! };
+    //     // }
 
-    public static getByUser = async (userId: string): Promise<{project?: Project, status?: string}[]> => {
+    //     // return { project: returnProject, permission: "Own" };
+    // };
+    
+
+    public static getByUser = async (userId: string): Promise<{ project?: Project, status?: string }[]> => {
 
         const userRepo = AppDataSource.getRepository(User);
         const projectRepo = AppDataSource.getRepository(Project);
         const permissionRepo = AppDataSource.getRepository(Permission);
 
         const user = await userRepo.findOne({ where: { id: userId } });
-        
+
         if (!user)
             throw new AppError("Problem authenticating user!", 401);
 
@@ -107,7 +160,7 @@ export default class ProjectService {
             project,
             status: "Own",
         }));
-    
+
 
         const permissions = await permissionRepo.find({
             where: { user: user },
@@ -119,14 +172,14 @@ export default class ProjectService {
                 },
             },
         });
-    
+
         const permissionProjects = permissions.map(permission => ({
             project: permission.project,
             status: permission.permission?.toString()
         }));
-    
+
         const allProjects = [...ownProjectsWithStatus, ...permissionProjects];
-    
+
         return allProjects;
     }
 }

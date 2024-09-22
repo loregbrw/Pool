@@ -1,6 +1,9 @@
-import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
 import BaseEntity from "./BaseEntity.entity";
 import User from "./User.entity";
+
+const contentColumnType = process.env.DB_TYPE === "postgres" ? "json" : "nvarchar";
+const contentColumnLength = process.env.DB_TYPE === "mssql" ? "MAX" : undefined;
 
 @Entity("Notifications")
 export default class Notification extends BaseEntity {
@@ -13,6 +16,6 @@ export default class Notification extends BaseEntity {
     @Column()
     date?: Date;
 
-    @Column({ type: "nvarchar", length: "MAX" })
+    @Column({ type: contentColumnType, length: contentColumnLength })
     content?: string;
 }

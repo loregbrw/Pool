@@ -2,6 +2,11 @@ import { z } from "zod";
 
 export default class UserSchemas {
 
+    public static login = z.object({
+        login: z.string().max(255),
+        password: z.string().max(255)
+    })
+
     public static creation = z.object({
         name: z.string().max(255),
         username: z.string().max(50),

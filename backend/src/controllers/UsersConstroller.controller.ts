@@ -41,6 +41,8 @@ export default class UsersController {
 
     public static getPagination = async (req: Request, res: Response) => {
 
+        // require token to get users!
+
         const { page = 1, size = 10, search = "" } = req.query;
 
         const users = await UserService.getPagination(Number(page), Number(size), search as string);
