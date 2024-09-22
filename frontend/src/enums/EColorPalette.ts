@@ -4,5 +4,5 @@ export enum EColorPalette {
     FRENCHGRAY = "#B8C2CB",
     JET = "#333138",
     COOLGRAY = "#7D8CA3",
-    CURNTSIENNA = "#EE6C4D"
+    BURNTSIENNA = "#EE6C4D"
 }

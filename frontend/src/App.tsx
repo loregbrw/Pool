@@ -4,7 +4,7 @@ import { Header } from "./components/header"
 export const App = ({ children }: { children: React.ReactNode}) => {
   return (
     <>
-      <Header />
+      <Header isProject={true} />
       { children }
     </>
   )
