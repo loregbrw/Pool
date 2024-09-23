@@ -30,7 +30,7 @@ export default class Card extends BaseEntity {
 
     @ManyToMany(() => CardTag)
     @JoinTable()
-    tag?: CardTag;
+    tags?: CardTag[];
 
     @ManyToMany(() => User)
     @JoinTable()

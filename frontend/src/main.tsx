@@ -18,7 +18,7 @@ import { Login } from './pages/login/index.tsx';
 import { SignUp } from './pages/signup/index.tsx';
 import { Home } from './pages/home/index.tsx';
 import { Project } from './pages/project/index.tsx';
-import { Calendar } from './pages/calendar/index.tsx';
+import { Calendars } from './pages/calendars/index.tsx';
 import { Profile } from './pages/profile/index.tsx';
 import { Register } from './pages/register/index.tsx';
 import { Password } from './pages/password/index.tsx';
@@ -62,7 +62,7 @@ const router = createBrowserRouter([
     path: "/calendar",
     element:
       <App>
-        <Calendar />
+        <Calendars />
       </App>
   },
   {

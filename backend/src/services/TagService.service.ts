@@ -66,7 +66,6 @@ export default class TagService {
 
     public static getByUser = async (userId: string): Promise<Tag[]> => {
 
-        const tagRepo = AppDataSource.getRepository(Tag);
         const userRepo = AppDataSource.getRepository(User);
 
         const user = await userRepo.findOne({ where: { id: userId }, relations: { tags: true } });
