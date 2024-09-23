@@ -172,7 +172,7 @@ export default class ProjectService {
 
         const ownProjectsWithStatus = ownProjects.map(project => ({
             project,
-            status: "Own",
+            status: "Owner",
         }));
 
         const permissions = user.permissions || [];

@@ -36,7 +36,7 @@ export const StyledBg = styled.div`
     &::-webkit-scrollbar {
         background-color: ${EColorPalette.JET};
 
-        height: 15px;
+        height: 10px;
     }
 
     &::-webkit-scrollbar-thumb {
