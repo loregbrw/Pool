@@ -104,81 +104,65 @@ export default class ProjectService {
         await projectRepo.softDelete(id);
     }
 
-    // public static getById = async (id: string, userId: string): Promise<{project: Project, permission: string}> => {
+    public static getById = async (id: string, userId: string): Promise<{ project: Project, permission: string }> => {
 
-    //     const userRepo = AppDataSource.getRepository(User);
-    //     const projectRepo = AppDataSource.getRepository(Project);
-    //     const permissionRepo = AppDataSource.getRepository(Permission);
+        const userRepo = AppDataSource.getRepository(User);
+        const projectRepo = AppDataSource.getRepository(Project);
+        const permissionRepo = AppDataSource.getRepository(Permission);
 
-    //     const user = await userRepo.findOne({ where: { id: userId } });
+        const user = await userRepo.findOne({ where: { id: userId } });
 
-    //     if (!user)
-    //         throw new AppError("User authentication failed!", 401);
+        if (!user)
+            throw new AppError("User authentication failed!", 401);
 
-    //     // const project = await projectRepo.findOne({
-    //     //     where: { id },
-    //     //     relations: {
-    //     //         user: true,
-    //     //         sprints: {
-    //     //             columns: {
-    //     //                 sections: {
-    //     //                     cards: {
-    //     //                         users: true,
-    //     //                         tag: true
-    //     //                     }
-    //     //                 },
-    //     //                 cards: {
-    //     //                     users: true,
-    //     //                     tag: true
-    //     //                 }
-    //     //             }
-    //     //         },
-    //     //         permissions: {
-    //     //             user: true
-    //     //         },
-    //     //         tag: true
-    //     //     }
-    //     // });
+        const project = await projectRepo.findOne({
+            where: { id: id },
+            relations: {
+                user: true,
+                sprints: true,
+                permissions: true
+            }
+        });
 
-    //     // if (!project)
-    //     //     throw new AppError("Project not found!", 404);
+        if (!project)
+            throw new AppError("Project not found!", 404);
 
-    //     // if (project.user?.id !== user.id) {
-    //     //     const permission = await permissionRepo.findOne({
-    //     //         where: {
-    //     //             project,
-    //     //             user
-    //     //         }
-    //     //     });
+        if (project.user?.id !== user.id) {
+            const permission = await permissionRepo.findOne({
+                where: {
+                    project,
+                    user
+                }
+            });
 
-    //     //     if (!permission)
-    //     //         throw new AppError("Forbidden access!", 403);
+            if (!permission)
+                throw new AppError("Forbidden access!", 403);
 
-    //     //     return { project, permission: permission.permission?.toString()! };
-    //     // }
+            return { project: { ...project, user: undefined, permissions: undefined }, permission: permission.permission?.toString()! };
+        }
 
-    //     // return { project: returnProject, permission: "Own" };
-    // };
+        return { project: { ...project, user: undefined, permissions: undefined }, permission: "Own"};
+    };
 
 
     public static getByUser = async (userId: string): Promise<{ project?: Project, status?: string }[]> => {
 
         const userRepo = AppDataSource.getRepository(User);
 
-        const user = await userRepo.findOne({ 
+        const user = await userRepo.findOne({
             where: { id: userId },
             relations: {
                 projects: {
-                    tag: true,          
-                    permissions: true,  
+                    tag: true,
+                    permissions: true,
                 },
                 permissions: {
                     project: {
-                        tag: true,        
-                        permissions: true, 
+                        tag: true,
+                        permissions: true,
                     }
                 }
-            } 
+            }
         });
 
         if (!user)
