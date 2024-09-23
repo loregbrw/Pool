@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 
 export const HeaderContainer = styled.div`
     display: flex;
+
     justify-content: space-between;
+    align-items: center;
+
     width: 100%;
     height: 60px;
     background-color: ${EColorPalette.MINTCREAM};
@@ -22,13 +25,6 @@ export const LeftTop = styled.div`
 
     width: 210px;
 `
-
-export const CenterTop = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
-
 export const RightTop = styled.div`
     display: flex;
     align-items: center;
@@ -36,37 +32,56 @@ export const RightTop = styled.div`
     gap: 25px;
 
     width: 210px;
+    height: 100%;
 `
-export const BackButton = styled(Link)`
+export const StyledLink = styled(Link)`
     text-decoration: none;
     font-weight: 700;
+
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 3px;
+        left: -2px;
+        bottom: -2px;
+
+        border-radius: 5px;
+
+        background-color: ${EColorPalette.ENGINEERINGORANGE};
+        transition: width 0.3s ease-out;
+    }
+
+    &:hover::after {
+        width: calc(100% + 4px);
+    }
 `
 
 export const LogoImg = styled.img`
-    height: 100%;
-`
-
-export const Calendar = styled(Link)`
-    text-decoration: none;
-    font-weight: 700;
-`
-
-export const NotificationButton = styled.button`
-    height: 100%;
-    border: none;
-    background-color: transparent;
     height: 30px;
 `
+
 export const NotificationIcon = styled.img`
-    height: 100%;
+    height: 30px;
+
+    cursor: pointer;
+    transition: 300ms;
+
+    &:hover {
+        filter: brightness(85%) saturate(125%);
+    }
 `
 
-export const PerfilButton = styled.button`
-    height: 100%; 
-    border: none;
-    background-color: transparent;
-`
 export const PerfilPhoto = styled.img`
     height: 100%;
     border-radius: 100%;
+
+    cursor: pointer;
+    transition: 300ms;
+
+    &:hover {
+        filter: brightness(85%) saturate(125%);
+    }
 `

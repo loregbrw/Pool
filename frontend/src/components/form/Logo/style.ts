@@ -1,32 +1,29 @@
 import styled from "styled-components";
-import { EColorPalette } from "../../../enums/EColorPalette";
 
 export const ImgBackground = styled.div`
-    background-image: url('/BackgroundLogin.jpeg');
     display: flex;
-    height: 100vh;
-    width: 50vw;
-
+    min-height: 100%;
+    eight: 100vh;
+    width: 50%;
+    
+    background-image: url('/BackgroundLogin.jpeg');
     background-position: center;
     background-size: cover;
+
     justify-content: center;
     align-items: center;
     flex-direction: column;
 
-    padding: max(5%, 35px);
+    padding: max(7.5%, 35px);
 
     @media (max-width: 1100px) {
-        background-color: ${EColorPalette.MINTCREAM};
-        background-image: none;
-        width: 100vw;
-        position: fixed;
-        align-items: start;
+        display: none;
     }
 `
 export const LogoImg = styled.img`
     width: min(75%,550px);
 `
 export const Slogan = styled.h2`
-    font-size: 2rem;
+    font-size: 1.75rem;
     text-align: center;
 ` 

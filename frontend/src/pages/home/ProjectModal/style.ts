@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { EColorPalette } from "../../../enums/EColorPalette";
 
 export const ProjectModalContainer = styled.div`
-    width: 100%;
+    width: calc(100% - 75px);
     max-width: 800px;
     position: absolute;
     display: flex;
@@ -14,6 +14,7 @@ export const ProjectModalContainer = styled.div`
     border: 2px ${EColorPalette.JET} solid;
     gap: 15px;
     align-items: center;
+
 `
 export const CloseButton = styled.button`
     border: none;
@@ -23,7 +24,7 @@ export const CloseButton = styled.button`
     top: 10px;
     position: absolute;
 `
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -41,7 +42,8 @@ export const Input = styled.input`
     background-color: ${EColorPalette.FRENCHGRAY} ;
     border: none;
     border-radius: 5px;
-    outline: none;
+
+    height: 30px;
 `
 export const Datecontainer = styled.div`
     width: 100%;
@@ -67,23 +69,18 @@ export const Description = styled.textarea`
     background-color: ${EColorPalette.FRENCHGRAY} ;
     border: none;
     border-radius: 5px;
-    outline: none;
+
+    height: 100px;
 `
 
-export const SelectPeople = styled.select`
-    width: 100%;
+
+export const StyledSelect = styled.select`
     padding: 3px 5px;
     background-color: ${EColorPalette.FRENCHGRAY} ;
     border: none;
     border-radius: 5px;
-    outline: none;
-`
-export const SelectTag = styled.select`
-    padding: 3px 5px;
-    background-color: ${EColorPalette.FRENCHGRAY} ;
-    border: none;
-    border-radius: 5px;
-    outline: none;
+
+    height: 30px;
 `
 export const Button = styled.button`
     width: 100%;
@@ -94,4 +91,13 @@ export const Button = styled.button`
     border: none;
     color: white;
     font-weight: 700;
+
+    margin-top: 15px;
+
+    cursor: pointer;
+    transition: 300ms;
+
+    &:hover {
+        filter: brightness(85%) saturate(125%);
+    }
 `

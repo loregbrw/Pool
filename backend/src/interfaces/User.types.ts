@@ -9,7 +9,7 @@ export type TUserCreation = {
     email: string;
     birthdate: Date;
     password: string;
-    image: string;
+    image?: string;
 };
 
 export type TUserUpdate = Partial<TUserCreation>;

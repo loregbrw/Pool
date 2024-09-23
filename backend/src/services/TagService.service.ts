@@ -69,16 +69,11 @@ export default class TagService {
         const tagRepo = AppDataSource.getRepository(Tag);
         const userRepo = AppDataSource.getRepository(User);
 
-        const user = await userRepo.findOne({ where: { id: userId } });
+        const user = await userRepo.findOne({ where: { id: userId }, relations: { tags: true } });
 
         if (!user)
             throw new AppError("User not found!", 404);
 
-        const tags = await tagRepo.find({
-            where: { user: user },
-            withDeleted: false
-        });
-
-        return tags;
+        return user.tags || [];
     }
 }

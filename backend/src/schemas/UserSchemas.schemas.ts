@@ -10,10 +10,10 @@ export default class UserSchemas {
     public static creation = z.object({
         name: z.string().max(255),
         username: z.string().max(50),
-        email: z.string().email().max(255),
+        email: z.string().max(255),
         birthdate: z.string(),
         password: z.string().max(100),
-        image: z.string().max(255)
+        image: z.string().max(255).optional()
     });
 
     public static update = z.object({

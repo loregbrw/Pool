@@ -17,6 +17,17 @@ export default class UsersController {
         return res.status(201).json({ user });
     }
 
+    public static get = async (req: Request, res: Response) => {
+
+        const userSession = (req as any).userSession;
+
+        if (!userSession)
+            throw new AppError("Unathorized!", 401);
+
+        const user = await UserService.getById(userSession.id);
+        return res.status(200).json({ user });
+    }
+
     public static update = async (req: Request, res: Response) => {
 
         const userSession = (req as any).userSession;

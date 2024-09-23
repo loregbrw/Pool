@@ -3,7 +3,7 @@ export type TProjectCreation = {
     description: string;
     tagId: string;
     users: string[];
-    sprintInitalDate: Date;
+    sprintInitialDate: Date;
     sprintDuration: number
 };
 

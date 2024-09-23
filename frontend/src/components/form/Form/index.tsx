@@ -1,28 +1,32 @@
 import { IFormProps } from ".."
-import { Button, Form, FormGroup, FormInput, Input, Label, FormContainer, TituleForm, FGPassword } from "./style"
+import { Button, Form, FormGroup, FormInput, Input, Label, FormContainer, TituleForm, StyledObs, StyledHeader, StyledBack } from "./style"
+import Back from "/Back.png"
 
-export const Forms = ({ title, inputs, button }: IFormProps) => {
+export const Forms = ({ title, inputs, button, back }: IFormProps) => {
+
     return (
         <>
+            <StyledHeader />
             <FormContainer>
-                <Form>
+                <StyledBack onClick={back} src={Back} />
+                <Form onSubmit={button.action}>
                     <TituleForm>{title}</TituleForm>
                     <FormGroup>
                         {
-                            inputs.map(input => (
-                                <FormInput>
+                            inputs.map((input, index) => (
+                                <FormInput key={index}>
                                     <Label>{input.label}</Label>
-                                    <Input type={input.type} />
-                                    {
+                                    <Input onChange={(e) => input.onChange(e.target.value)} type={input.type} maxLength={255} required />
+                                    {   
                                         input.obs &&
-                                        <FGPassword>{input.obs}</FGPassword>
+                                        <StyledObs>{input.obs}</StyledObs>
                                     }
                                 </FormInput>
                             ))
                         }
 
                     </FormGroup>
-                    <Button type="button" onClick={button.action} >{button.title}</Button>
+                    <Button type="submit">{button.title}</Button>
                 </Form>
             </FormContainer>
         </>

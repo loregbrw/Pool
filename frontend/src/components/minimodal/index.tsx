@@ -1,3 +1,4 @@
+import React from "react";
 import { IInput } from "../form";
 import { Button, CloseButton, FormContainer, Input, Label, MiniModalContainer, Titulo } from "./styles"
 
@@ -7,7 +8,7 @@ import { Button, CloseButton, FormContainer, Input, Label, MiniModalContainer, T
         closeAction: () => void;
         button: {
             name: string;
-            action: () => void;
+            action: (e: React.FormEvent) => void;
         }
     }
 
@@ -21,11 +22,11 @@ export const MiniModal = ({title, inputs, button, closeAction}: IMiniModalProps 
                         inputs.map((input, index) => (
                             <FormContainer key={index}>
                                 <Label>{input.label}</Label>
-                                <Input type={input.type}/>
+                                <Input onChange={(e) => input.onChange(e.target.value)} maxLength={255} type={input.type}/>
                             </FormContainer>    
                         ))
                     }
-                <Button type="button" onClick={button.action}>{button.name}</Button>
+                <Button type="submit" onClick={button.action}>{button.name}</Button>
             </MiniModalContainer>
         </>
     )

@@ -30,10 +30,12 @@ export default class UserService {
         if (findUsername)
             throw new AppError("Username already in use!");
 
+        const image = payload.image || "/User.png";
+
         const salt = await genSalt(12);
         const hashedPassword = await hash(payload.password, salt);
 
-        const user: User = userRepo.create({ ...payload, password: hashedPassword });
+        const user: User = userRepo.create({ ...payload, password: hashedPassword, image: image });
         const createdUser = await userRepo.save(user);
 
         return { ...createdUser, password: undefined };

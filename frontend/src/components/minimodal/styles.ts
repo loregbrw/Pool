@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { EColorPalette } from "../../enums/EColorPalette";
 
-export const MiniModalContainer = styled.div`
+export const MiniModalContainer = styled.form`
     width: 100%;
     max-width: 300px;
     position: absolute;
@@ -22,6 +22,8 @@ export const CloseButton = styled.button`
     right: 10px;
     top: 10px;
     position: absolute;
+
+    cursor: pointer;
 `
 export const FormContainer = styled.div`
     display: flex;
@@ -45,11 +47,18 @@ export const Input = styled.input`
 `
 export const Button = styled.button`
     width: 100%;
-    padding: 3px;
+    padding: 5px;
     border: 1px ${EColorPalette.JET} solid;
     border-radius: 5px;
     background-color: ${EColorPalette.BURNTSIENNA};
     border: none;
     color: white;
     font-weight: 700;
+
+    cursor: pointer;
+    transition: 300ms;
+
+    &:hover {
+        filter: brightness(85%) saturate(125%);
+    }
 `

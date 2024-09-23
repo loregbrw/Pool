@@ -4,6 +4,7 @@ import { Cards } from "./Cards"
 import { HeaderHome } from "./HeaderHome"
 
 export const Home = () => {
+
     const [tagModalOpen, setTagModalOpen] = useState(false)
     const [projModalOpen, setProjModalOpen] = useState(false)
 
@@ -21,10 +22,10 @@ export const Home = () => {
     return (
         <>
             <Main>
-                <HeaderHome  projModalOpen={projModalOpen} tagModalOpen = {tagModalOpen} closeModal= {closeModal} openTagModal={openTagModal} openProjModal={openProjModal}/>
-                <Cards/>
+                <HeaderHome projModalOpen={projModalOpen} tagModalOpen={tagModalOpen} closeModal={closeModal} openTagModal={openTagModal} openProjModal={openProjModal} />
+                <Cards reload={projModalOpen} />
             </Main>
-        
+
         </>
     )
 }

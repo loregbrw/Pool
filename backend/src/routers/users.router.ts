@@ -8,6 +8,7 @@ const usersRouter: Router = Router();
 usersRouter.post("/", ValidateMiddleware.validadeBody(UserSchemas.creation), UsersController.create);
 usersRouter.patch("/", ValidateMiddleware.validadeBody(UserSchemas.update), ValidateMiddleware.validadeToken, UsersController.update);
 usersRouter.delete("/", ValidateMiddleware.validadeToken, UsersController.delete);
-usersRouter.get("/", UsersController.getPagination);
+usersRouter.get("/", ValidateMiddleware.validadeToken, UsersController.get);
+usersRouter.get("/pag", ValidateMiddleware.validadeToken, UsersController.getPagination);
 
 export default usersRouter;

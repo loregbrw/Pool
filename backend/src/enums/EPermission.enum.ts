@@ -21,6 +21,6 @@ export const stringToPermission = (string: string): EPermission => {
         case "Editor":
             return EPermission.EDITOR;
         default:
-            throw new AppError("Error getting EPermission enum from database", 500);
+            return EPermission.VIEWER;
     }
 }

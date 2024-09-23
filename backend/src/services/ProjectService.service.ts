@@ -2,7 +2,9 @@ import AppDataSource from "../data-source";
 import Permission from "../entities/Permission.entity";
 import Project from "../entities/Project.entity";
 import Sprint from "../entities/Sprint.entity";
+import Tag from "../entities/Tag.entity";
 import User from "../entities/User.entity";
+import { EPermission } from "../enums/EPermission.enum";
 import AppError from "../errors";
 import { TProjectCreation, TProjectUpdate } from "../interfaces/Project.types";
 import { TSprintCreation } from "../interfaces/Sprint.types";
@@ -13,24 +15,48 @@ export default class ProjectService {
     public static create = async (payload: TProjectCreation, userId: string): Promise<Project> => {
 
         const userRepo = AppDataSource.getRepository(User);
+        const tagRepo = AppDataSource.getRepository(Tag);
         const projectRepo = AppDataSource.getRepository(Project);
+        const permissionRepo = AppDataSource.getRepository(Permission);
 
         const user = await userRepo.findOne({ where: { id: userId } });
 
         if (!user)
             throw new AppError("Problem authenticating user!", 401);
 
-        const project = projectRepo.create({ ...payload, user: user });
+        const tag = await tagRepo.findOne({ where: { id: payload.tagId } });
+
+        if (!tag)
+            throw new AppError("Invalid Tag!", 400);
+
+        const project = projectRepo.create({ name: payload.name, description: payload.description, status: false, tag: tag, user: user });
         const createdProject = await projectRepo.save(project);
 
         const sprintData: TSprintCreation = {
             name: "Sprint 1",
-            initialDate: payload.sprintInitalDate,
+            initialDate: payload.sprintInitialDate,
             duration: payload.sprintDuration,
             projectId: createdProject.id!
         };
 
         const sprint = await SprintService.create(sprintData, userId);
+
+        for (const id of payload.users) {
+
+            const foundUser = await userRepo.findOne({ where: { id: id } });
+
+            if (!foundUser) {
+                throw new AppError(`Invalid userId! [${id}]`, 400);
+            } else {
+                const permission = permissionRepo.create({
+                    user: foundUser,
+                    project: createdProject,
+                    permission: EPermission.EDITOR
+                });
+
+                await permissionRepo.save(permission);
+            }
+        }
 
         return { ...createdProject, user: undefined };
     }
@@ -83,12 +109,12 @@ export default class ProjectService {
     //     const userRepo = AppDataSource.getRepository(User);
     //     const projectRepo = AppDataSource.getRepository(Project);
     //     const permissionRepo = AppDataSource.getRepository(Permission);
-    
+
     //     const user = await userRepo.findOne({ where: { id: userId } });
-    
+
     //     if (!user)
     //         throw new AppError("User authentication failed!", 401);
-    
+
     //     // const project = await projectRepo.findOne({
     //     //     where: { id },
     //     //     relations: {
@@ -113,10 +139,10 @@ export default class ProjectService {
     //     //         tag: true
     //     //     }
     //     // });
-    
+
     //     // if (!project)
     //     //     throw new AppError("Project not found!", 404);
-    
+
     //     // if (project.user?.id !== user.id) {
     //     //     const permission = await permissionRepo.findOne({
     //     //         where: {
@@ -124,54 +150,48 @@ export default class ProjectService {
     //     //             user
     //     //         }
     //     //     });
-    
+
     //     //     if (!permission)
     //     //         throw new AppError("Forbidden access!", 403);
-    
+
     //     //     return { project, permission: permission.permission?.toString()! };
     //     // }
 
     //     // return { project: returnProject, permission: "Own" };
     // };
-    
+
 
     public static getByUser = async (userId: string): Promise<{ project?: Project, status?: string }[]> => {
 
         const userRepo = AppDataSource.getRepository(User);
-        const projectRepo = AppDataSource.getRepository(Project);
-        const permissionRepo = AppDataSource.getRepository(Permission);
 
-        const user = await userRepo.findOne({ where: { id: userId } });
+        const user = await userRepo.findOne({ 
+            where: { id: userId },
+            relations: {
+                projects: {
+                    tag: true,          
+                    permissions: true,  
+                },
+                permissions: {
+                    project: {
+                        tag: true,        
+                        permissions: true, 
+                    }
+                }
+            } 
+        });
 
         if (!user)
             throw new AppError("Problem authenticating user!", 401);
 
-        const ownProjects = await projectRepo.find({
-            where: { user: user },
-            withDeleted: false,
-            relations: {
-                sprints: true,
-                permissions: true,
-                tag: true,
-            },
-        });
+        const ownProjects = user.projects || [];
 
         const ownProjectsWithStatus = ownProjects.map(project => ({
             project,
             status: "Own",
         }));
 
-
-        const permissions = await permissionRepo.find({
-            where: { user: user },
-            relations: {
-                project: {
-                    sprints: true,
-                    permissions: true,
-                    tag: true,
-                },
-            },
-        });
+        const permissions = user.permissions || [];
 
         const permissionProjects = permissions.map(permission => ({
             project: permission.project,
