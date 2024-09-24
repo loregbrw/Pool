@@ -36,12 +36,14 @@ export const StyledBg = styled.div`
     &::-webkit-scrollbar {
         background-color: ${EColorPalette.JET};
 
-        height: 10px;
+        height: 15px;
     }
 
     &::-webkit-scrollbar-thumb {
         background-color: ${EColorPalette.COOLGRAY};
         border-radius: 15px;
+
+        border: solid ${EColorPalette.JET} 3px;
     }
 `
 
@@ -53,7 +55,7 @@ export const StyledDiv = styled.div`
 `
 
 export const StyledColumn = styled.div`
-    width: 400px;
+    width: 350px;
     
     height: fit-content;
     
@@ -79,13 +81,14 @@ export const StyledContent = styled.div`
         background-color: ${EColorPalette.JET};
         width: 10px;
 
-        border-radius: 15px;
+        border-radius: 10px;
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: ${EColorPalette.MINTCREAM};
+        background-color: ${EColorPalette.COOLGRAY};
         border-radius: 15px;
-        cursor: pointer;
+
+        border: solid ${EColorPalette.JET} 2px;
     }
 `
 
@@ -215,6 +218,15 @@ export const StyledTags = styled.div`
     width: fit-content;
     max-width: 100%;
 `
+export const StyledDate = styled.span`
+    font-size: 0.8rem;
+    font-weight: 700;
+
+    display: flex;
+    align-items: flex-end;
+
+    height: 25px;;
+`
 
 export const StyledTag = styled.div`
     background-color: blue;
@@ -234,7 +246,7 @@ export const StyledImg = styled.img`
 `
 
 export const StyledAdd = styled.div`
-    width: 400px;
+    width: 350px;
     
     height: fit-content;
     

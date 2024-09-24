@@ -1,15 +1,17 @@
-import { StyledAdd, StyledBg, StyledButton, StyledCard, StyledCardDes, StyledCardName, StyledColumn, StyledContent, StyledDiv, StyledEdit, StyledFooter, StyledImg, StyledName, StyledSection, StyledSections, StyledSpaceBetween, StyledSprint, StyledSprintName, StyledTag, StyledTags } from "./style"
+import { StyledAdd, StyledBg, StyledButton, StyledCardDes, StyledColumn, StyledContent, StyledDiv, StyledEdit, StyledFooter, StyledName, StyledSections, StyledSpaceBetween, StyledSprint, StyledSprintName } from "./style"
 
 import Options from "/Options.png"
-import Menu from "/Menu.png"
 import { useEffect, useState } from "react";
 import { api } from "../../../service/api";
 import { ISprint } from "..";
 import { HeaderSprint } from "../headerSprint";
+// import { Section } from "./section";
+import { Card } from "./card";
 
 interface ISprintProps {
     id: string | null;
 }
+
 
 export const Sprint = ({ id }: ISprintProps) => {
 
@@ -19,6 +21,8 @@ export const Sprint = ({ id }: ISprintProps) => {
         const getSprint = async () => {
             if (!id) return
 
+            console.log("id: " + id)
+
             try {
                 const response = await api.get(`/sprints/${id}`, {
                     headers: {
@@ -27,7 +31,7 @@ export const Sprint = ({ id }: ISprintProps) => {
                 });
 
                 setSprint(response.data.sprint);
-
+                console.log(response.data.sprint);
             } catch (error) {
                 console.log(error);
             }
@@ -50,45 +54,32 @@ export const Sprint = ({ id }: ISprintProps) => {
         <>
             <StyledSprint>
                 <StyledBg>
-                    <HeaderSprint></HeaderSprint>
+                    <HeaderSprint
+                        timeProgress={(Math.floor(Math.abs(new Date().getTime() - new Date(sprint.initialDate).getTime()) / (1000 * 60 * 60 * 24)) + 1) / sprint.duration} tasksProgress={0} />
                     <StyledDiv>
-                        <StyledColumn>
-                            <StyledSpaceBetween>
-                                <StyledName>Column Name</StyledName>
-                                <StyledEdit src={Options} />
-                            </StyledSpaceBetween>
-                            <StyledButton>NOVO CARTÃO +</StyledButton>
-                            <StyledContent>
-                                <StyledSections>
-                                    <StyledSection>
-                                        <StyledCardName>Section Name</StyledCardName>
-                                        <StyledCard>
-                                            <StyledSpaceBetween>
-                                                <StyledCardName>Card Name</StyledCardName>
-                                                <StyledEdit style={{ height: "20px" }} src={Menu} />
-                                            </StyledSpaceBetween>
-                                            <StyledCardDes>Description description description description description description description</StyledCardDes>
-                                            <StyledTags>
-                                                <StyledTag>Pessoal</StyledTag>
-                                                <StyledTag>Pessoal</StyledTag>
-                                            </StyledTags>
-                                            <StyledSpaceBetween>
-                                                <StyledTags>
-                                                    <StyledImg src="/User.png" />
-                                                    <StyledImg src="/User.png" />
-                                                    <StyledImg src="/User.png" />
-                                                    <StyledCardName>+</StyledCardName>
-                                                </StyledTags>
-                                                <StyledTags>
-                                                    xx/xx/xxxx
-                                                    🔴🟢
-                                                </StyledTags>
-                                            </StyledSpaceBetween>
-                                        </StyledCard>
-                                    </StyledSection>
-                                </StyledSections>
-                            </StyledContent>
-                        </StyledColumn>
+                        {
+                            sprint.columns?.sort((a, b) => a.index - b.index).map((column, index) => (
+                                <StyledColumn key={index}>
+                                    <StyledSpaceBetween>
+                                        <StyledName>{column.name}</StyledName>
+                                        <StyledEdit src={Options} />
+                                    </StyledSpaceBetween>
+                                    <StyledButton>NOVO CARTÃO +</StyledButton>
+                                    <StyledContent>
+                                        <StyledSections>
+                                            {
+                                                column.cards.map((card, index) => (
+                                                    <Card key={index} id={card.id} />
+                                                ))
+                                            }
+                                        </StyledSections>
+                                        {/* <StyledSections>
+                                            <Section id={""} />
+                                        </StyledSections> */}
+                                    </StyledContent>
+                                </StyledColumn>
+                            ))
+                        }
                         <StyledAdd>
                             <StyledName style={{ textAlign: "center" }}>Adicionar Coluna +</StyledName>
                         </StyledAdd>

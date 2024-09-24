@@ -9,7 +9,26 @@ export interface ISprint {
     initialDate: Date;
     duration: number;
     status: boolean;
-    columns?: [];
+    columns?: IColumn[];
+}
+
+interface IColumn {
+    id: string;
+    index: number;
+    name: string;
+    cards: ICard[],
+    sections: []
+}
+
+export interface ICard {
+    id: string;
+    description: string;
+    dueDate: Date;
+    index: number;
+    name: string;
+    status: boolean;
+    tags: [];
+    users: [];
 }
 
 export interface IProject {
@@ -26,11 +45,12 @@ export interface IProject {
 export const Project = () => {
 
     const [sprint, setSprint] = useState<ISprint>();
-    const [project, setProject] = useState<IProject | null>(null);
+    // const [project, setProject] = useState<IProject | null>(null);
 
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
+        
         const getProject = async () => {
             try {
                 const response = await api.get(`/projects/${id}`, {
@@ -41,7 +61,7 @@ export const Project = () => {
 
                 const data = response.data?.project.project;
 
-                setProject(data);
+                // setProject(data);
 
                 const filteredSprints = data?.sprints
                     .filter((sprint: ISprint) => !sprint.status)
@@ -52,7 +72,6 @@ export const Project = () => {
 
             } catch (error) {
                 console.log(error);
-                alert(error);
             }
         };
 

@@ -13,6 +13,7 @@ export const StyledHeader = styled.header`
 
     padding: 10px 35px;
     position: fixed;
+
 `
 
 export const StyledIcon = styled.img`
@@ -63,6 +64,10 @@ export const StyledBox = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+
+    @media (max-width: 800px) {
+        display: none;
+    }
 `
 
 export const StyledBar = styled.div`
@@ -75,10 +80,7 @@ export const StyledBar = styled.div`
 `
 
 export const StyledProgress = styled.div`
-
     height: 10px;
-
-    position: absolute;
-
+    background-color: ${EColorPalette.JET};    
     border-radius: 10px;
-`
+`;

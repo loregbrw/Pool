@@ -20,8 +20,6 @@ import { Home } from './pages/home/index.tsx';
 import { Project } from './pages/project/index.tsx';
 import { Calendar } from './pages/calendar/index.tsx';
 import { Profile } from './pages/profile/index.tsx';
-import { Register } from './pages/register/index.tsx';
-import { Password } from './pages/password/index.tsx';
 import { ThemeProvider } from './context/theme.tsx';
 
 const router = createBrowserRouter([
