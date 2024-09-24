@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Card, CardColor, CardNotification, CardsContainer, Description, MorePeople, NameProject, PeopleGroup, PeopleImg, StyledTag } from "./style"
 import { api } from "../../../service/api"
+import { useNavigate } from "react-router-dom";
 
 interface IProject {
     project: {
@@ -24,6 +25,7 @@ interface ICardsProps {
 export const Cards = ({ reload }: ICardsProps) => {
 
     const [projects, setProjects] = useState<IProject[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getProjects = async () => {
@@ -64,13 +66,13 @@ export const Cards = ({ reload }: ICardsProps) => {
             <CardsContainer>
                 {
                     projects.map((project, index) => (
-                        <Card key={index}>
-                            <CardColor style={{ backgroundColor: project.project.tag.color}} >
+                        <Card onClick={() => navigate(`/project/${project.project.id}`)} key={index}>
+                            <CardColor style={{ backgroundColor: project.project.tag.color }} >
                                 <CardNotification />
                                 <StyledTag>{project.project.tag.name}</StyledTag>
                             </CardColor>
-                                <NameProject>{project.project.name}</NameProject>
-                                <Description>{project.project.description}</Description>
+                            <NameProject>{project.project.name}</NameProject>
+                            <Description>{project.project.description}</Description>
                             <PeopleGroup>
                                 <PeopleImg src="/Perfil.png" />
                                 <PeopleImg src="/Perfil.png" />

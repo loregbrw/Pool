@@ -25,4 +25,14 @@ export default class ProjectsController {
         const projects = await ProjectService.getByUser(userSession.id);
         return res.status(200).json({ projects });
     }
+
+    public static getById = async (req: Request, res: Response) => {
+        const userSession = (req as any).userSession;
+
+        if (!userSession)
+            throw new AppError("Unathorized!", 401);
+
+        const project = await ProjectService.getById(req.params.id, userSession.id);
+        return res.status(200).json({ project });
+    }
 }
