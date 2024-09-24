@@ -8,7 +8,7 @@ import { EPermission } from "../enums/EPermission.enum";
 import AppError from "../errors";
 import { TProjectCreation, TProjectUpdate } from "../interfaces/Project.types";
 import { TSprintCreation } from "../interfaces/Sprint.types";
-import { SprintService } from "./SprintService.service";
+import SprintService from "./SprintService.service";
 
 export default class ProjectService {
 

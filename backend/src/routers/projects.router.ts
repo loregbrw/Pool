@@ -1,7 +1,7 @@
 import { Router } from "express";
 import ProjectsController from "../controllers/ProjectsController.controller";
 import ValidateMiddleware from "../middlewares/ValidateMiddleware.middleware";
-import ProjectSchemas from "../schemas/ProjectSchemas";
+import ProjectSchemas from "../schemas/ProjectSchemas.schemas";
 
 const projectsRouter = Router();
 

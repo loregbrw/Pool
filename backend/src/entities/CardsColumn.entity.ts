@@ -16,7 +16,7 @@ export default class CardsColumn extends BaseEntity {
     sprint?: Sprint;
 
     @OneToMany(() => Card, (c) => c.column)
-    permissions?: Card[];
+    cards?: Card[];
 
     @OneToMany(() => Section, (s) => s.column)
     sections?: Section[];

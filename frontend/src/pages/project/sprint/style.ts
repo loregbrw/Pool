@@ -133,6 +133,8 @@ export const StyledSection = styled.div`
     flex-direction: column;
 
     padding: 10px;
+
+    gap: 10px;
 `
 
 export const StyledSpaceBetween = styled.div`
