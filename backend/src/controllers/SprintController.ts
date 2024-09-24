@@ -32,7 +32,7 @@ export default class SprintController {
         if (!userSession)
             throw new AppError("Unathorized!", 401);
 
-        const sprint = await SprintService.getById(req.params.id, userSession.id);
+        const sprint = await SprintService.getById(req.params.id);
         return res.status(200).json({ sprint });
     }
 } 

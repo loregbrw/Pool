@@ -19,18 +19,18 @@ export default class Card extends BaseEntity {
     @Column()
     status?: boolean;
 
-    @ManyToOne(() => CardsColumn, { cascade: true })
+    @ManyToOne(() => CardsColumn, { cascade: true, nullable: true })
     column?: CardsColumn;
 
     @Column()
     index?: number;
 
-    @ManyToOne(() => Section, { cascade: true })
+    @ManyToOne(() => Section, { cascade: true, nullable: true })
     section?: Section;
 
     @ManyToMany(() => CardTag)
     @JoinTable()
-    tag?: CardTag;
+    tags?: CardTag[];
 
     @ManyToMany(() => User)
     @JoinTable()
