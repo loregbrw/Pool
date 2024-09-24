@@ -6,8 +6,8 @@ export const StyledMain = styled.main`
 
     width: 100%;
 
-    min-height: 100vh;
-    height: fit-content;
+    height: 100vh;
+    min-height: fit-content;
 
     align-items: center;
 

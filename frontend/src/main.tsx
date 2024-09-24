@@ -64,14 +64,6 @@ const router = createBrowserRouter([
       <App>
         <Calendars />
       </App>
-  },
-  {
-    path: "/register",
-    element:<Register />
-  },
-  {
-    path: "/password",
-    element:<Password />
   }
 ]);
 

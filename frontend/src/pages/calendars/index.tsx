@@ -2,6 +2,7 @@ import moment from "moment";
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Main } from '../../components/main';
+import "./style.css"
 
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 
@@ -47,7 +48,6 @@ export const Calendars = () => {
                     events={[]} 
                     startAccessor="start"
                     endAccessor="end"
-                    style={{  height: '70vh', width: "50vw", padding: '20px', display: "flex", gap: "10px" }}
                     defaultView="month" 
                 />
                 {/* {eventSelect && (
