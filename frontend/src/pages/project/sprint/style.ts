@@ -26,7 +26,7 @@ export const StyledBg = styled.div`
     height: calc(100% - 70px);
     width: 100%;
 
-    padding: 90px 35px 35px 35px;
+    padding: 130px 35px 35px 35px;
 
     display: block;
 
@@ -69,14 +69,14 @@ export const StyledColumn = styled.div`
 
 export const StyledContent = styled.div`
     height: fit-content;
-    max-height: calc(100vh - 320px);
+    max-height: calc(100vh - 380px);
     width: 100%;
 
     overflow-y: auto;
     white-space: nowrap;
 
     &::-webkit-scrollbar {
-        background-color: ${EColorPalette.FRENCHGRAY};
+        background-color: ${EColorPalette.JET};
         width: 10px;
 
         border-radius: 15px;

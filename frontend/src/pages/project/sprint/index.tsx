@@ -5,6 +5,7 @@ import Menu from "/Menu.png"
 import { useEffect, useState } from "react";
 import { api } from "../../../service/api";
 import { ISprint } from "..";
+import { HeaderSprint } from "../headerSprint";
 
 interface ISprintProps {
     id: string | null;
@@ -49,6 +50,7 @@ export const Sprint = ({ id }: ISprintProps) => {
         <>
             <StyledSprint>
                 <StyledBg>
+                    <HeaderSprint></HeaderSprint>
                     <StyledDiv>
                         <StyledColumn>
                             <StyledSpaceBetween>
@@ -97,7 +99,7 @@ export const Sprint = ({ id }: ISprintProps) => {
                     <StyledSprintName>
                         <StyledName style={{ textAlign: "center" }}>{sprint.name}</StyledName>
                         <StyledCardDes style={{ textAlign: "center" }}>
-                            {Math.floor(Math.abs(new Date().getTime() - new Date(sprint.initialDate).getTime()) / (1000 * 60 * 60 * 24))}º dia de {sprint.duration} dias
+                            {Math.floor(Math.abs(new Date().getTime() - new Date(sprint.initialDate).getTime()) / (1000 * 60 * 60 * 24)) + 1}º dia de {sprint.duration} dia{sprint.duration > 1 ? "s" : ""}
                         </StyledCardDes>
 
                     </StyledSprintName>
