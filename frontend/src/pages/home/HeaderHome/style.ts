@@ -81,6 +81,7 @@ export const SelectTags = styled.select`
     padding: 5px 20px;
     border: none;
 
+
     height: 30px;
     background-color: ${EColorPalette.COOLGRAY};
     font-weight: 700;

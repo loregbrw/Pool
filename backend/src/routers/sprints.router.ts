@@ -7,5 +7,6 @@ const sprintsRouter = Router();
 
 sprintsRouter.get("/:id", ValidateMiddleware.validadeToken, SprintController.getById);
 sprintsRouter.post("/", ValidateMiddleware.validadeBody(SprintSchemas.creation), ValidateMiddleware.validadeToken, SprintController.create);
+sprintsRouter.patch("/:id", ValidateMiddleware.validadeBody(SprintSchemas.update), ValidateMiddleware.validadeToken, SprintController.update);
 
 export default sprintsRouter;

@@ -10,6 +10,7 @@ import tagsRouter from "./routers/tags.router";
 import projectsRouter from "./routers/projects.router";
 import sprintsRouter from "./routers/sprints.router";
 import columnsRouter from "./routers/column.router";
+import cardsRouter from "./routers/card.router";
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use("/tags", tagsRouter);
 app.use("/projects", projectsRouter);
 app.use("/sprints", sprintsRouter);
 app.use("/columns", columnsRouter);
+app.use("/cards", cardsRouter);
 
 app.use(handleError);
 
