@@ -34,7 +34,6 @@ export default class SprintService {
     public static update = async (id: string, payload: TSprintUpdate, userId: string): Promise<Sprint> => {
 
         const sprintRepo = AppDataSource.getRepository(Sprint);
-        const projectRepo = AppDataSource.getRepository(Project);
         const userRepo = AppDataSource.getRepository(User);
 
         const user = await userRepo.findOne({ where: { id: userId } });
@@ -44,20 +43,17 @@ export default class SprintService {
 
         // verificar se o usuario tem permição ou se é viewer
 
-        const sprint = sprintRepo.findOne({
-            where: { id: id },
-            relations: {
-                project: true
-            }
+        const sprint = await sprintRepo.findOne({
+            where: { id: id }
         });
 
         if (!sprint)
             throw new AppError("Sprint not found!", 404);
 
-        const a = sprintRepo.create({ ...sprint, ...payload });
-        const createdSprint = await sprintRepo.save(sprint);
+        const updatedSprint = sprintRepo.create({ ...sprint, ...payload });
+        const savedSprint = await sprintRepo.save(updatedSprint);
 
-        return createdSprint;
+        return savedSprint;
     }
 
     public static getById = async (id: string): Promise<Sprint> => {

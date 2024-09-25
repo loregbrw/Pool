@@ -14,4 +14,15 @@ export default class ColumnController {
         const column = await ColumnService.create(req.body, userSession.id);
         return res.status(201).json({ column });
     }
+
+    public static update = async (req: Request, res: Response) => {
+
+        const userSession = (req as any).userSession;
+
+        if (!userSession)
+            throw new AppError("Unathorized!", 401);
+
+        const column = await ColumnService.update(req.params.id, req.body, userSession.id);
+        return res.status(201).json({ column });
+    }
 }

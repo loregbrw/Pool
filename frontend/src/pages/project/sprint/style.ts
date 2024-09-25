@@ -103,6 +103,13 @@ export const StyledSections = styled.div`
 export const StyledName = styled.span`
     font-size: 1.2rem;
     font-weight: 700;
+
+    cursor: pointer;
+    transition: 300ms;
+
+    &:hover {
+        filter: brightness(75%) saturate(125%);
+    }
 `
 
 export const StyledNameInput = styled.input`

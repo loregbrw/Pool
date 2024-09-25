@@ -1,9 +1,10 @@
 import AppDataSource from "../data-source";
 import Card from "../entities/Card.entity";
 import AppError from "../errors";
-import { TCardCreation } from "../interfaces/Card.types";
+import { TCardCreation, TCardUpdate } from "../interfaces/Card.types";
 import Section from "../entities/Section.entity";
 import CardsColumn from "../entities/CardsColumn.entity";
+import User from "../entities/User.entity";
 
 export default class CardService {
 
@@ -45,6 +46,33 @@ export default class CardService {
 
             return createdCard;
         }
+    }
+
+    public static update = async (id: string, payload: TCardUpdate, userId: string) => {
+
+        const cardRepo = AppDataSource.getRepository(Card);
+        const userRepo = AppDataSource.getRepository(User);
+
+        if (payload.columnId && payload.sectionId)
+            throw new AppError("Invalid parameters sectionId AND columnId", 400);
+
+        const user = await userRepo.findOne({ where: { id: userId } });
+
+        if (!user)
+            throw new AppError("Problem authenticating user!", 401);
+
+        const card = await cardRepo.findOne({
+            where: { id: id }
+        })
+
+        if (!card)
+            throw new AppError("Card not found!", 404);
+
+        const updatedCard = cardRepo.create({ ...card, ...payload });
+        const savedCard = await cardRepo.save(updatedCard);
+
+        return savedCard;
+
     }
 
     public static getById = async (id: string) => {

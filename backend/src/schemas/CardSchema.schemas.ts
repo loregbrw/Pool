@@ -8,7 +8,7 @@ export default class CardSchema {
         dueDate: z.preprocess(
             (arg) => (typeof arg === 'string' || arg instanceof Date ? new Date(arg) : undefined),
             z.date()
-        ),
+        ).optional(),
         status: z.boolean(),
         index: z.number().int().nonnegative(),
         sectionId: z.string().uuid().optional(),

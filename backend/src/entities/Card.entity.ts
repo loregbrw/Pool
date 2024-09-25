@@ -13,7 +13,7 @@ export default class Card extends BaseEntity {
     @Column({ length: 1000 })
     description?: string;
 
-    @Column()
+    @Column({ nullable: true})
     dueDate?: Date;
 
     @Column()

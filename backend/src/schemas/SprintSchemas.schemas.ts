@@ -11,4 +11,14 @@ export default class SprintSchemas {
         ),
         duration: z.number()
     });
+
+    public static update = z.object({
+        name: z.string().max(255).optional(),
+        initialDate: z.preprocess(
+            (arg) => (typeof arg === 'string' || arg instanceof Date ? new Date(arg) : undefined),
+            z.date()
+        ).optional(),
+        duration: z.number().optional(),
+        status: z.boolean().optional()
+    });
 }

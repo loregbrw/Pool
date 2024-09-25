@@ -4,9 +4,4 @@ export type TColumnCreation = {
     sprintId: string;
 }
 
-type TColumn = {
-    name: string;
-    index: string;
-}
-
-export type TColumnUpdate = Partial<TColumn>;
+export type TColumnUpdate = Partial<TColumnCreation>;

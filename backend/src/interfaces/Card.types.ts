@@ -8,3 +8,5 @@ export type TCardCreation = {
     columnId?: string;
     tagsId: string[];
 }
+
+export type TCardUpdate = Partial<TCardCreation>;

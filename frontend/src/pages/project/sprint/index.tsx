@@ -1,13 +1,12 @@
-import { StyledAdd, StyledBg, StyledButton, StyledCardDes, StyledColumn, StyledConfirm, StyledContent, StyledDiv, StyledEdit, StyledFooter, StyledName, StyledNameInput, StyledSections, StyledSpaceBetween, StyledSprint, StyledSprintName } from "./style"
+import { StyledAdd, StyledBg, StyledCardDes,StyledConfirm, StyledDiv, StyledEdit, StyledFooter, StyledName, StyledNameInput, StyledSprint, StyledSprintName } from "./style"
 
-import Options from "/Options.png"
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { api } from "../../../service/api";
 import { ISprint } from "..";
 import { HeaderSprint } from "../headerSprint";
-import Confirm from "/Confirm.png";
 // import { Section } from "./section";
-import { Card } from "./card";
+import { toast } from "react-toastify";
+import { Column } from "./column";
 
 interface ISprintProps {
     id: string | null;
@@ -19,13 +18,83 @@ export const Sprint = ({ id }: ISprintProps) => {
     const [sprintName, setSprintName] = useState("");
     const [sprint, setSprint] = useState<ISprint | null>(null);
     const [editingSprint, setEditingSprint] = useState(false);
+    const [change, setChange] = useState(false);
 
+    const addColumn = async () => {
+        try {
+            const response = await api.post(`/columns`,
+                {
+                    name: "Nova Coluna",
+                    index: sprint?.columns?.length,
+                    sprintId: sprint?.id
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("Token")}`,
+                    },
+                });
+
+                setChange(!change);
+            toast.success("Coluna adicionada!");
+        } catch (error) {
+            console.log(error);
+            toast.error("Erro ao adicionar coluna!");
+        }
+    }
+
+    const addCard = async (columnId: string, len: number) => {
+        try {
+            const response = await api.post(`/cards`,
+                {
+                    name: "Novo card",
+                    description: "",
+                    status: false,
+                    index: len + 1,
+                    columnId: columnId,
+                    tagsId: []
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("Token")}`,
+                    },
+                });
+
+                setChange(!change);
+            toast.success("Cartão criado!");
+        } catch (error) {
+            console.log(error);
+            toast.error("Erro ao adicionar cartão!");
+        }
+    }
+
+    const editSprintName = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        try {
+            const response = await api.patch(`/sprints/${id}`,
+                {
+                    name: sprintName
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("Token")}`,
+                    },
+                });
+
+        } catch (error) {
+            toast.error("Erro ao alterar sprint!");
+        }
+
+        setChange(!change);
+        setEditingSprint(false);
+    }
+    
     useEffect(() => {
         const getSprint = async () => {
-            if (!id) return
-
-            console.log("id: " + id)
-
+            if (!id) return;
+            
+            console.log("id: " + id);
+            
             try {
                 const response = await api.get(`/sprints/${id}`, {
                     headers: {
@@ -39,9 +108,9 @@ export const Sprint = ({ id }: ISprintProps) => {
                 console.log(error);
             }
         };
-
+        
         getSprint();
-    }, [id]);
+    }, [id, change]);
 
     if (!sprint) {
         return (
@@ -51,6 +120,12 @@ export const Sprint = ({ id }: ISprintProps) => {
                 </StyledSprint>
             </>
         )
+    }
+    
+    const openEditName = () => {
+        
+        setSprintName(sprint?.name);
+        setEditingSprint(true);
     }
 
     return (
@@ -62,28 +137,10 @@ export const Sprint = ({ id }: ISprintProps) => {
                     <StyledDiv>
                         {
                             sprint.columns?.sort((a, b) => a.index - b.index).map((column, index) => (
-                                <StyledColumn key={index}>
-                                    <StyledSpaceBetween>
-                                        <StyledName>{column.name}</StyledName>
-                                        <StyledEdit src={Options} />
-                                    </StyledSpaceBetween>
-                                    <StyledButton>NOVO CARTÃO +</StyledButton>
-                                    <StyledContent>
-                                        <StyledSections>
-                                            {
-                                                column.cards.map((card, index) => (
-                                                    <Card key={index} id={card.id} />
-                                                ))
-                                            }
-                                        </StyledSections>
-                                        {/* <StyledSections>
-                                            <Section id={""} />
-                                        </StyledSections> */}
-                                    </StyledContent>
-                                </StyledColumn>
+                                <Column setChange={setChange} column={column} index={index} addCard={addCard} change={change}/>
                             ))
                         }
-                        <StyledAdd>
+                        <StyledAdd onClick={addColumn}>
                             <StyledName style={{ textAlign: "center" }}>Adicionar Coluna +</StyledName>
                         </StyledAdd>
                     </StyledDiv>
@@ -92,7 +149,7 @@ export const Sprint = ({ id }: ISprintProps) => {
                     <StyledEdit style={{ rotate: "180deg" }} src="/Next.png" />
                     {
                         !editingSprint &&
-                        <StyledSprintName onClick={() => setEditingSprint(true)}>
+                        <StyledSprintName onClick={openEditName}>
                             <StyledName style={{ textAlign: "center" }}>{sprint.name}</StyledName>
                             <StyledCardDes style={{ textAlign: "center" }}>
                                 {Math.floor(Math.abs(new Date().getTime() - new Date(sprint.initialDate).getTime()) / (1000 * 60 * 60 * 24)) + 1}º dia de {sprint.duration} dia{sprint.duration > 1 ? "s" : ""}
@@ -101,12 +158,12 @@ export const Sprint = ({ id }: ISprintProps) => {
                     }
                     {
                         editingSprint &&
-                        <StyledSprintName onClick={() => setEditingSprint(true)}>
-                            <form>
+                        <StyledSprintName>
+                            <form onSubmit={editSprintName}>
                                 <StyledNameInput type="text" style={{ textAlign: "center" }} value={sprintName} onChange={(e) => setSprintName(e.target.value)} />
-                                <StyledConfirm />
+                                <StyledConfirm type="submit" />
                             </form>
-                            <StyledCardDes style={{ textAlign: "center" }}>
+                            <StyledCardDes  onClick={() => setEditingSprint(false)} style={{ textAlign: "center" }}>
                                 {Math.floor(Math.abs(new Date().getTime() - new Date(sprint.initialDate).getTime()) / (1000 * 60 * 60 * 24)) + 1}º dia de {sprint.duration} dia{sprint.duration > 1 ? "s" : ""}
                             </StyledCardDes>
                         </StyledSprintName>
