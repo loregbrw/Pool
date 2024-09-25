@@ -103,6 +103,43 @@ export const StyledSections = styled.div`
 export const StyledName = styled.span`
     font-size: 1.2rem;
     font-weight: 700;
+
+    cursor: pointer;
+    transition: 300ms;
+
+    &:hover {
+        filter: brightness(75%) saturate(125%);
+    }
+`
+
+export const StyledNameInput = styled.input`
+    font-size: 1.2rem;
+    font-weight: 700;
+
+    border: none;
+    background-color: transparent;
+
+    border-bottom: 2px solid ${EColorPalette.JET};
+    outline: none;
+`
+
+export const StyledConfirm = styled.button`
+    position: absolute;
+
+    background: url("/Confirm.png");
+
+    background-size: contain;
+
+    height: 30px;
+    width: 30px;
+
+    border: none;
+    cursor: pointer;
+    transition: 300ms;
+
+    &:hover {
+        filter: brightness(85%) saturate(125%);
+    }
 `
 
 export const StyledButton = styled.button`
@@ -270,4 +307,6 @@ export const StyledAdd = styled.div`
 export const StyledSprintName = styled.div`
     display: flex;
     flex-direction: column;
+
+    cursor: pointer;
 `

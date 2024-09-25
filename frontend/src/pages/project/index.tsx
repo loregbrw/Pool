@@ -12,7 +12,7 @@ export interface ISprint {
     columns?: IColumn[];
 }
 
-interface IColumn {
+export interface IColumn {
     id: string;
     index: number;
     name: string;

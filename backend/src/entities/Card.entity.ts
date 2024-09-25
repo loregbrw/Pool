@@ -13,19 +13,19 @@ export default class Card extends BaseEntity {
     @Column({ length: 1000 })
     description?: string;
 
-    @Column()
+    @Column({ nullable: true})
     dueDate?: Date;
 
     @Column()
     status?: boolean;
 
-    @ManyToOne(() => CardsColumn, { cascade: true })
+    @ManyToOne(() => CardsColumn, { cascade: true, nullable: true })
     column?: CardsColumn;
 
     @Column()
     index?: number;
 
-    @ManyToOne(() => Section, { cascade: true })
+    @ManyToOne(() => Section, { cascade: true, nullable: true })
     section?: Section;
 
     @ManyToMany(() => CardTag)
