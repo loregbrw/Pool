@@ -160,7 +160,7 @@ export const Sprint = ({ id }: ISprintProps) => {
                         editingSprint &&
                         <StyledSprintName>
                             <form onSubmit={editSprintName}>
-                                <StyledNameInput type="text" style={{ textAlign: "center" }} value={sprintName} onChange={(e) => setSprintName(e.target.value)} />
+                                <StyledNameInput onBlur={() => setEditingSprint(false)} type="text" style={{ textAlign: "center" }} value={sprintName} onChange={(e) => setSprintName(e.target.value)} />
                                 <StyledConfirm type="submit" />
                             </form>
                             <StyledCardDes  onClick={() => setEditingSprint(false)} style={{ textAlign: "center" }}>

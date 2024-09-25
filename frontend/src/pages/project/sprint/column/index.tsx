@@ -59,7 +59,7 @@ export const Column = ({ column, index, addCard, change, setChange }: IColumnPro
                     {
                         editingColumn &&
                         <form onSubmit={editColumnName}>
-                            <StyledNameInput type="text" value={columnName} onChange={(e) => setColumnName(e.target.value)} />
+                            <StyledNameInput onBlur={() => setEditingColumn(false)} type="text" value={columnName} onChange={(e) => setColumnName(e.target.value)} />
                             <StyledConfirm type="submit" />
                         </form>
                     }
@@ -70,7 +70,7 @@ export const Column = ({ column, index, addCard, change, setChange }: IColumnPro
                     <StyledSections>
                         {
                             column.cards.map((card, index) => (
-                                <Card key={index} id={card.id} />
+                                <Card key={index} id={card.id} change={change} setChange={setChange} />
                             ))
                         }
                     </StyledSections>

@@ -6,6 +6,7 @@ import CardController from "../controllers/CardController.controller";
 const cardsRouter: Router = Router();
 
 cardsRouter.get("/:id", ValidateMiddleware.validadeToken, CardController.getById);
+cardsRouter.patch("/:id", ValidateMiddleware.validadeBody(CardSchema.update), ValidateMiddleware.validadeToken, CardController.update);
 cardsRouter.post("/", ValidateMiddleware.validadeBody(CardSchema.creation), ValidateMiddleware.validadeToken, CardController.create);
 
 export default cardsRouter;
