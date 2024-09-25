@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { HeaderContainer, LeftTop, LogoImg, NotificationIcon, PerfilPhoto, RightTop, StyledLink } from "./style"
 import { ThemeContext } from "../../context/theme"
 import { api } from "../../service/api";
+import { useNavigate } from "react-router-dom";
 
 
 interface IUser {
@@ -22,6 +23,7 @@ export const Header = ({ isProject }: IHeaderProps) => {
 
     const [user, setUser] = useState<IUser | null>(null);
     const { theme } = useContext(ThemeContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -55,7 +57,7 @@ export const Header = ({ isProject }: IHeaderProps) => {
                 <RightTop>
                     <StyledLink to="/calendar">Calendário</StyledLink>
                     <NotificationIcon src={theme.theme === "light" ? "/JetNotification.png" : "/MintNotification.png"} />
-                    <PerfilPhoto src={user?.image} />
+                    <PerfilPhoto src={user?.image} onClick={()=> navigate("/profile")} />
                 </RightTop>
             </HeaderContainer>
         </>

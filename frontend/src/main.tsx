@@ -21,6 +21,7 @@ import { Project } from './pages/project/index.tsx';
 import { Calendars } from './pages/calendars/index.tsx';
 import { Profile } from './pages/profile/index.tsx';
 import { ThemeProvider } from './context/theme.tsx';
+import { Config } from './pages/config/index.tsx';
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,13 @@ const router = createBrowserRouter([
     element:
       <App>
         <Profile />
+      </App>
+  },
+  {
+    path: "/config",
+    element:
+      <App>
+        <Config />
       </App>
   },
   {

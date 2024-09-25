@@ -52,6 +52,8 @@ export default class UserService {
         const updatedUser = userRepo.create({ ...user, ...payload });
         const savedUser = await userRepo.save(updatedUser);
 
+        console.log(savedUser);
+
         return { ...savedUser, password: undefined };
     }
 

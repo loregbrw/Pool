@@ -56,13 +56,33 @@ export const DescriptionUser = styled.h3`
     width: 100%;
     font-size: 1rem;
 `
+export const ConfigProfile = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+`
+
+export const Label = styled.label`
+font-weight: 500;
+`
+
+export const Select = styled.select`
+    border: none;
+    border-radius: 5px;
+`
+
+export const Configuration = styled.div`
+    display: flex;
+    gap: 10px;
+`
+
 export const ButtonsContainer = styled.div`
     width: 100%;
     display: flex;
     gap: 10px;
     flex-direction: row;
 `
-export const ConfigurationButton = styled.button`
+export const SaveButton = styled.button`
     padding: 5px;
     width: 50%;
     display: flex;
@@ -73,7 +93,8 @@ export const ConfigurationButton = styled.button`
     color: white;
     border: none;
 `
-export const ExitButton = styled.button`
+
+export const DeleteButton = styled.button`
     padding: 5px;
     width: 50%;
     display: flex;
@@ -83,4 +104,35 @@ export const ExitButton = styled.button`
     background-color: ${EColorPalette.ENGINEERINGORANGE};
     color: white;
     border: none;
+`
+
+export const StyledNameInput = styled.input`
+    font-size: 1.2rem;
+    font-weight: 700;
+    width: 100%;
+
+    border: none;
+    background-color: transparent;
+
+    border-bottom: 2px solid ${EColorPalette.JET};
+    outline: none;
+`
+
+export const StyledConfirm = styled.button`
+    position: absolute;
+
+    background: url("/Confirm.png");
+
+    background-size: contain;
+
+    height: 30px;
+    width: 30px;
+
+    border: none;
+    cursor: pointer;
+    transition: 300ms;
+
+    &:hover {
+        filter: brightness(85%) saturate(125%);
+    }
 `

@@ -31,7 +31,8 @@ export default class UsersController {
     public static update = async (req: Request, res: Response) => {
 
         const userSession = (req as any).userSession;
-
+    
+        console.log(userSession);
         if (!userSession)
             throw new AppError("Unathorized!", 401);
 
