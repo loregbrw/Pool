@@ -1,4 +1,4 @@
-import { StyledBar, StyledBox, StyledButton, StyledDiv, StyledHeader, StyledIcon, StyledProgress } from "./style";
+import { StyledBar, StyledBox, StyledButton, StyledDiv, StyledHeader, StyledIcon, StyledProgessDiv, StyledProgress } from "./style";
 import Notification from "/JetNotification.png";
 import Chat from "/Chat.png";
 import Edit from "/Edit.png";
@@ -19,22 +19,22 @@ export const HeaderSprint = ({ timeProgress, tasksProgress }: IHeaderSprintProps
           <StyledIcon src={Edit} />
           <StyledIcon src={Plus} />
         </StyledDiv>
-        <StyledDiv>
+        <StyledDiv style={{ gap: "15px" }}>
           <StyledBox>
-            <StyledDiv>
-              <span>Tempo passado:</span>
+            <StyledProgessDiv>
+              <span style={{ fontSize: "0.9rem", fontWeight: "700"}}>Tempo passado:</span>
               <StyledBar>
                 <StyledProgress style={{ width: `${timeProgress * 100}%` }} />
               </StyledBar>
-            </StyledDiv>
-            <StyledDiv>
-              <span>Progresso feito:</span>
+            </StyledProgessDiv>
+            <StyledProgessDiv>
+              <span style={{ fontSize: "0.9rem", fontWeight: "700"}}>Progresso feito:</span>
               <StyledBar>
                 <StyledProgress style={{ width: `${tasksProgress * 100}%` }} />
               </StyledBar>
-            </StyledDiv>
+            </StyledProgessDiv>
           </StyledBox>
-          <StyledButton>Terminar Sprint</StyledButton>
+          <StyledButton>Terminar Sprint</StyledButton>  
         </StyledDiv>
       </StyledHeader>
     </>

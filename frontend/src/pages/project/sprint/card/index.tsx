@@ -79,13 +79,13 @@ export const Card = ({ id }: ICardProps) => {
                     {
                         editingCard &&
                         <form onSubmit={editCardName}>
-                            <StyledNameInput onBlur={() => setEditingcard(false)} type="text" value={cardName} onChange={(e) => setCardName(e.target.value)} style={{ fontSize: "1rem" }} />
+                            <StyledNameInput type="text" value={cardName} onChange={(e) => setCardName(e.target.value)} style={{ fontSize: "1rem" }} />
                             <StyledConfirm type="submit" />
                         </form>
                     }
                     <StyledEdit style={{ height: "20px" }} src={Menu} />
                 </StyledSpaceBetween>
-                <StyledCardDes>{card?.description}</StyledCardDes>
+                <StyledCardDes>{card?.description || "..."}</StyledCardDes>
                 <StyledTags>
                     {
                         card?.tags.map((tag, index) => (
@@ -95,10 +95,14 @@ export const Card = ({ id }: ICardProps) => {
                 </StyledTags>
                 <StyledSpaceBetween>
                     <StyledTags>
-                        <StyledImg src="/User.png" />
-                        <StyledImg src="/User.png" />
-                        <StyledImg src="/User.png" />
+                        {
+                            card?.users.map((user, index) => (
+                                <StyledImg key={index} src="/User.png" />
+
+                            ))
+                        }
                         <StyledCardName>+</StyledCardName>
+
                     </StyledTags>
                     <StyledTags>
                         <StyledDate>

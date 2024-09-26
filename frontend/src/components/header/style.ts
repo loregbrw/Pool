@@ -9,7 +9,7 @@ export const HeaderContainer = styled.div`
     align-items: center;
 
     width: 100%;
-    height: 60px;
+    height: 50px;
     background-color: ${EColorPalette.MINTCREAM};
     padding: 10px 35px;
 
@@ -60,11 +60,11 @@ export const StyledLink = styled(Link)`
 `
 
 export const LogoImg = styled.img`
-    height: 30px;
+    height: 25px;
 `
 
 export const NotificationIcon = styled.img`
-    height: 30px;
+    height: 25px;
 
     cursor: pointer;
     transition: 300ms;
@@ -75,7 +75,7 @@ export const NotificationIcon = styled.img`
 `
 
 export const PerfilPhoto = styled.img`
-    height: 100%;
+    height: 30px;
     border-radius: 100%;
 
     cursor: pointer;

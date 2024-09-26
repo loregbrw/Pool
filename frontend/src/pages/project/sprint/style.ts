@@ -9,7 +9,7 @@ export const StyledSprint = styled.div`
 export const StyledFooter = styled.footer`
     border-top: solid 2px ${EColorPalette.JET};
 
-    height: 70px;
+    height: 60px;
     width: 100%;
 
     background-color: ${EColorPalette.MINTCREAM};
@@ -23,10 +23,10 @@ export const StyledFooter = styled.footer`
 export const StyledBg = styled.div`
     background-color: ${EColorPalette.FRENCHGRAY};
 
-    height: calc(100% - 70px);
+    height: calc(100% - 60px);
     width: 100%;
 
-    padding: 130px 35px 35px 35px;
+    padding: 110px 35px 35px 35px;
 
     display: block;
 
@@ -51,18 +51,18 @@ export const StyledDiv = styled.div`
     display: flex;
     width: fit-content;
 
-    gap: 30px;
+    gap: 20px;
 `
 
 export const StyledColumn = styled.div`
-    width: 350px;
+    width: 335px;
     
     height: fit-content;
     
     background-color: ${EColorPalette.COOLGRAY};
     border-radius: 10px;
 
-    padding: 15px;
+    padding: 13px;
 
     display: flex;
     flex-direction: column;
@@ -71,7 +71,7 @@ export const StyledColumn = styled.div`
 
 export const StyledContent = styled.div`
     height: fit-content;
-    max-height: calc(100vh - 365px);
+    max-height: calc(100vh - 335px);
     width: 100%;
 
     overflow-y: auto;
@@ -101,7 +101,7 @@ export const StyledSections = styled.div`
 `
 
 export const StyledName = styled.span`
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
 
     cursor: pointer;
@@ -113,7 +113,7 @@ export const StyledName = styled.span`
 `
 
 export const StyledNameInput = styled.input`
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
 
     border: none;
@@ -224,6 +224,7 @@ export const StyledCard = styled.div`
 `
 
 export const StyledCardName = styled.span`
+    font-size: 1rem;
     font-weight: 700;
 
     overflow: hidden;                
@@ -284,7 +285,7 @@ export const StyledImg = styled.img`
 `
 
 export const StyledAdd = styled.div`
-    width: 350px;
+    width: 335px;
     
     height: fit-content;
     

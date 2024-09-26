@@ -59,7 +59,7 @@ export const Column = ({ column, index, addCard, change, setChange }: IColumnPro
                     {
                         editingColumn &&
                         <form onSubmit={editColumnName}>
-                            <StyledNameInput onBlur={() => setEditingColumn(false)} type="text" value={columnName} onChange={(e) => setColumnName(e.target.value)} />
+                            <StyledNameInput type="text" value={columnName} onChange={(e) => setColumnName(e.target.value)} />
                             <StyledConfirm type="submit" />
                         </form>
                     }
