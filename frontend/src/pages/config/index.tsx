@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Main } from "../../components/main"
-import { ButtonsContainer, ConfigProfile, Configuration, ContentConteiner, DeleteButton, DescriptionUser, Image, ImgContainer, InformationContainer, Label, Name, ProfileContainer, SaveButton, Select, StyledConfirm, StyledNameInput, UserContainer } from "./style"
+import { ButtonsContainer, ConfigProfile, Configuration, ContentConteiner, DeleteButton, DescriptionUser, EditIcon, Image, ImgContainer, InformationContainer, Label, Name, ProfileContainer, SaveButton, Select, StyledConfirm, StyledDescriptionInput, StyledNameInput, UserContainer } from "./style"
 import { useNavigate } from "react-router-dom";
 import { api } from "../../service/api";
 import { toast } from "react-toastify";
+import Edit from "/EditIcon.png"
 
 interface IUser {
     birthdate: Date;
@@ -17,14 +18,9 @@ interface IUser {
 export const Config = () => {
 
     const [user, setUser] = useState<IUser | null>(null);
-    const [editingName, setEditingName] = useState(false);
     const [editedName, setEditedName] = useState<string>("");
+    const [editedUsername, setEditedUsername] = useState<string>("");
     const navigate = useNavigate();
-
-    const editName = async (e: React.FormEvent) => {
-        e.preventDefault();
-        saveChanges();
-    }
 
     const saveChanges = async () => {
         try {
@@ -32,29 +28,23 @@ export const Config = () => {
                 throw new Error("User ID is missing.");
             }
     
-            const response = await api.patch(`/users/${user.id}`, // Certifique-se de que o ID está na URL
+            const response = await api.patch(`/users/${user.id}`, 
                 {
-                    name: editedName // Envia o nome editado
+                    name: editedName,
+                    username: editedUsername,
                 },
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("Token")}`,
                     },
                 });
-            console.log(response);
-            setUser({ ...user!, name: editedName });
+            navigate("/profile");
             toast.success("Nome alterado com sucesso!");
         } catch (error) {
             console.log(error);
             toast.error("Erro ao alterar nome!");
 
         }
-        setEditingName(false);
-    }
-
-    const openEditName = () => {
-        setEditedName(user?.name || "");
-        setEditingName(true);
     }
 
 
@@ -68,7 +58,11 @@ export const Config = () => {
                     }
                 });
 
-                setUser(response.data.user);
+                const user = response.data.user;
+                setUser(user);
+                setEditedName(user?.name);
+                setEditedUsername(user?.username);
+
             } catch (error) {
                 console.log(error);
                 if (error.response.status === 401) {
@@ -90,24 +84,22 @@ export const Config = () => {
                     <ContentConteiner>
                         <InformationContainer>
                             <UserContainer>
-                                {
-                                    !editingName &&
-                                    <Name onClick={openEditName}>{user?.name}</Name>
-
-                                }
-                                {
-                                    editingName &&
-                                    <form onSubmit={editName}>
-                                        <StyledNameInput
-                                            type="text"
-                                            value={editedName} 
-                                            onChange={(e) => setEditedName(e.target.value)} 
-                                        />
-                                        <StyledConfirm type="submit" />
-                                    </form>
-                                }
-                                <DescriptionUser>@{user?.username}</DescriptionUser>
+                                <StyledNameInput
+                                    type="text"
+                                    value={editedName} 
+                                    onChange={(e) => setEditedName(e.target.value)} 
+                                />
+                                
+                                <DescriptionUser>
+                                    <StyledDescriptionInput
+                                    type="text"
+                                    value={editedUsername} 
+                                    onChange={(e) => setEditedUsername(e.target.value)} 
+                                    />
+                                </DescriptionUser>
+                                
                             </UserContainer>
+                            
                             <DescriptionUser>{user?.email}</DescriptionUser>
                         </InformationContainer>
                         <ConfigProfile>
@@ -131,6 +123,7 @@ export const Config = () => {
                             <DeleteButton>Excluir Conta</DeleteButton>
                         </ButtonsContainer>
                     </ContentConteiner>
+                    <EditIcon src={Edit}/>
                 </ProfileContainer>
             </Main>
         </>

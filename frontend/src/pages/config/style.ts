@@ -47,15 +47,29 @@ export const UserContainer = styled.div`
 
 export const Name = styled.h2`
     width: 100%;
+    font-size: 1.2rem;
 `
 
-export const DescriptionUser = styled.h3`
+export const DescriptionUser = styled.div`
     font-weight: 500;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     font-size: 1rem;
 `
+export const StyledDescriptionInput = styled.input`
+    font-size: 1rem;
+    font-weight: 500;
+    width: 100%;
+
+    border: none;
+    background-color: transparent;
+
+    border-bottom: 2px solid ${EColorPalette.JET};
+    outline: none;
+`
+
+
 export const ConfigProfile = styled.div`
     display: flex;
     flex-direction: column;
@@ -117,7 +131,10 @@ export const StyledNameInput = styled.input`
     border-bottom: 2px solid ${EColorPalette.JET};
     outline: none;
 `
-
+export const EditIcon = styled.img`
+    width: 25px;
+    height: 25px;
+`
 export const StyledConfirm = styled.button`
     position: absolute;
 
