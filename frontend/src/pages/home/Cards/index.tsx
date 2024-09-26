@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Card, CardColor, CardNotification, CardsContainer, Description, MorePeople, NameProject, PeopleGroup, PeopleImg, StyledTag } from "./style"
 import { api } from "../../../service/api"
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface IProject {
     project: {

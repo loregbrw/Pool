@@ -71,7 +71,7 @@ export const StyledColumn = styled.div`
 
 export const StyledContent = styled.div`
     height: fit-content;
-    max-height: calc(100vh - 380px);
+    max-height: calc(100vh - 365px);
     width: 100%;
 
     overflow-y: auto;
@@ -262,7 +262,8 @@ export const StyledDate = styled.span`
     display: flex;
     align-items: flex-end;
 
-    height: 25px;;
+    height: 25px;
+    gap: 5px;
 `
 
 export const StyledTag = styled.div`

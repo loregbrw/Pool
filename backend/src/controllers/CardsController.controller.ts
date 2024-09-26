@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import AppError from "../errors";
 import CardService from "../services/CardService.service";
 
-export default class CardController {
+export default class CardsController {
 
     public static create = async (req: Request, res: Response) => {
 

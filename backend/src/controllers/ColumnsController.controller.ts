@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import AppError from "../errors";
 import ColumnService from "../services/ColumnService.service";
 
-export default class ColumnController {
+export default class ColumnsController {
 
     public static create = async (req: Request, res: Response) => {
 

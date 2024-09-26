@@ -25,14 +25,14 @@ export const CardModal = () => {
                     <BackContainer>
                         <InputContainer style={{ width: "60%" }}>
                             <Label>tag:</Label>
-                            <StyledSelect onChange={(e) => setTagId(e.target.value)}>
+                            {/* <StyledSelect onChange={(e) => setTagId(e.target.value)}>
                                 <option style={{ color: EColorPalette.MINTCREAM }} value="">Selecionar</option>
                                 {
                                     tags.map((tag, index) => (
                                         <option style={{ backgroundColor: tag.color, color: EColorPalette.MINTCREAM }} value={tag.id} key={index}>{tag.name}</option>
                                     ))
                                 }
-                            </StyledSelect>
+                            </StyledSelect> */}
                         </InputContainer>
                         <InputContainer>
                             <Label>Data de Entrega:</Label>

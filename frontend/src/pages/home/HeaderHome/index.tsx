@@ -127,17 +127,12 @@ export const HeaderHome = ({ tagModalOpen, closeModal, openTagModal, projModalOp
                 <ProjectModal closeAction={closeModal} />
             }
             {
-                tagModalOpen &&
+                (tagModalOpen || projModalOpen) &&
                 <>
                     <BackgroundModal action={closeModal} />
                 </>
             }
-            {
-                projModalOpen &&
-                <>
-                    <BackgroundModal action={closeModal} />
-                </>
-            }
+
 
         </>
     )

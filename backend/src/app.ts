@@ -9,8 +9,9 @@ import handleError from "./middlewares/handleError.middleware";
 import tagsRouter from "./routers/tags.router";
 import projectsRouter from "./routers/projects.router";
 import sprintsRouter from "./routers/sprints.router";
-import columnsRouter from "./routers/column.router";
-import cardsRouter from "./routers/card.router";
+import columnsRouter from "./routers/columns.router";
+import cardsRouter from "./routers/cards.router";
+import sectionsRouter from "./routers/sections.router";
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use("/projects", projectsRouter);
 app.use("/sprints", sprintsRouter);
 app.use("/columns", columnsRouter);
 app.use("/cards", cardsRouter);
+app.use("/sections", sectionsRouter);
 
 app.use(handleError);
 
