@@ -18,36 +18,42 @@ export const Config = () => {
 
     const [user, setUser] = useState<IUser | null>(null);
     const [editingName, setEditingName] = useState(false);
-    const [name, setName] = useState(user?.name || '');
-    const [editingUserName, setEditingUserName] = useState(false);
-    const [editingEmail, setEditingEmail] = useState(false);
+    const [editedName, setEditedName] = useState<string>("");
     const navigate = useNavigate();
 
     const editName = async (e: React.FormEvent) => {
         e.preventDefault();
+        saveChanges();
+    }
 
+    const saveChanges = async () => {
         try {
-            const response = await api.patch(`/users/`,
+            if (!user?.id) {
+                throw new Error("User ID is missing.");
+            }
+    
+            const response = await api.patch(`/users/${user.id}`, // Certifique-se de que o ID está na URL
                 {
-                    name: user?.name
+                    name: editedName // Envia o nome editado
                 },
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("Token")}`,
                     },
                 });
-                console.log(response);
+            console.log(response);
+            setUser({ ...user!, name: editedName });
+            toast.success("Nome alterado com sucesso!");
         } catch (error) {
             console.log(error);
             toast.error("Erro ao alterar nome!");
-            
+
         }
         setEditingName(false);
     }
 
     const openEditName = () => {
-
-        setName(user?.name || '');
+        setEditedName(user?.name || "");
         setEditingName(true);
     }
 
@@ -74,12 +80,12 @@ export const Config = () => {
         getUser();
     }, [])
 
-    return(
+    return (
         <>
             <Main>
                 <ProfileContainer>
                     <ImgContainer>
-                        <Image src={user?.image}/>
+                        <Image src={user?.image} />
                     </ImgContainer>
                     <ContentConteiner>
                         <InformationContainer>
@@ -92,7 +98,11 @@ export const Config = () => {
                                 {
                                     editingName &&
                                     <form onSubmit={editName}>
-                                        <StyledNameInput type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                                        <StyledNameInput
+                                            type="text"
+                                            value={editedName} 
+                                            onChange={(e) => setEditedName(e.target.value)} 
+                                        />
                                         <StyledConfirm type="submit" />
                                     </form>
                                 }
@@ -117,7 +127,7 @@ export const Config = () => {
                             </Configuration>
                         </ConfigProfile>
                         <ButtonsContainer>
-                            <SaveButton>Salvar Mudanças</SaveButton>
+                            <SaveButton onClick={saveChanges}>Salvar Mudanças</SaveButton>
                             <DeleteButton>Excluir Conta</DeleteButton>
                         </ButtonsContainer>
                     </ContentConteiner>
