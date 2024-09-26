@@ -262,7 +262,8 @@ export const StyledDate = styled.span`
     display: flex;
     align-items: flex-end;
 
-    height: 25px;;
+    height: 25px;
+    gap: 5px;
 `
 
 export const StyledTag = styled.div`

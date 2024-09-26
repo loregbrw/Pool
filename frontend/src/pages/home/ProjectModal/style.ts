@@ -14,7 +14,6 @@ export const ProjectModalContainer = styled.div`
     border: 2px ${EColorPalette.JET} solid;
     gap: 15px;
     align-items: center;
-
 `
 export const CloseButton = styled.button`
     border: none;

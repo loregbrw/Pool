@@ -17,6 +17,8 @@ export const Card = ({ id }: ICardProps) => {
     const [editingCard, setEditingcard] = useState(false);
     const [change, setChange] = useState(false);
 
+    const [openCard, setOpenCard] = useState(false);
+
     const editCardName = async (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -68,8 +70,8 @@ export const Card = ({ id }: ICardProps) => {
 
     return (
         <>
-            <StyledCard>
-                <StyledSpaceBetween>
+            <StyledCard onClick={() => setOpenCard(true)}>
+                <StyledSpaceBetween onClick={(e) => e.stopPropagation()}>
                     {
                         !editingCard &&
                         <StyledCardName onClick={openEditName}>{card?.name}</StyledCardName>
@@ -101,7 +103,7 @@ export const Card = ({ id }: ICardProps) => {
                     <StyledTags>
                         <StyledDate>
                             {card?.dueDate ? new Date(card.dueDate).toLocaleDateString() : ''}
-                            {card?.status === false ? " 🔴" : " 🟢"}
+                            <span onClick={(e) => e.stopPropagation()}>{card?.status === false ? "🔴" : "🟢"}</span>
                         </StyledDate>
                     </StyledTags>
                 </StyledSpaceBetween>
