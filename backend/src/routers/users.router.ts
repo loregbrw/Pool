@@ -6,7 +6,7 @@ import UserSchemas from "../schemas/UserSchemas.schemas";
 const usersRouter: Router = Router();
 
 usersRouter.post("/", ValidateMiddleware.validadeBody(UserSchemas.creation), UsersController.create);
-usersRouter.patch("/", ValidateMiddleware.validadeBody(UserSchemas.update), ValidateMiddleware.validadeToken, UsersController.update);
+usersRouter.patch("/:id", ValidateMiddleware.validadeBody(UserSchemas.update), ValidateMiddleware.validadeToken, UsersController.update);
 usersRouter.delete("/", ValidateMiddleware.validadeToken, UsersController.delete);
 usersRouter.get("/", ValidateMiddleware.validadeToken, UsersController.get);
 usersRouter.get("/pag", ValidateMiddleware.validadeToken, UsersController.getPagination);
