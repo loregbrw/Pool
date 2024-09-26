@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import AppError from "../errors";
 import SprintService from "../services/SprintService.service";
 
-export default class SprintController {
+export default class SprintsController {
 
     public static create = async (req: Request, res: Response) => {
 

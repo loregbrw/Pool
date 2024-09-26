@@ -69,8 +69,8 @@ export const Column = ({ column, index, addCard, change, setChange }: IColumnPro
                 <StyledContent>
                     <StyledSections>
                         {
-                            column.cards.map((card, index) => (
-                                <Card key={index} id={card.id} change={change} setChange={setChange} />
+                            column.cards.sort((a, b) => a.index - b.index).map((card, index) => (
+                                <Card key={index} id={card.id} />
                             ))
                         }
                     </StyledSections>

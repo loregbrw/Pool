@@ -71,7 +71,7 @@ export const StyledColumn = styled.div`
 
 export const StyledContent = styled.div`
     height: fit-content;
-    max-height: calc(100vh - 380px);
+    max-height: calc(100vh - 365px);
     width: 100%;
 
     overflow-y: auto;
